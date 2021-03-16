@@ -6,8 +6,8 @@ plugins {
 
 group = 'dev.carrico'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-targetCompatibility = '11'
+sourceCompatibility = '8'
+targetCompatibility = '8'
 
 task fatJar(type: Jar) {
 	manifest {
