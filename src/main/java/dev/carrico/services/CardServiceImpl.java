@@ -1,6 +1,7 @@
 package dev.carrico.services;
 
 import dev.carrico.entities.Card;
+import dev.carrico.entities.Tag;
 import dev.carrico.repos.CardRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,5 +46,11 @@ public class CardServiceImpl implements CardService{
     public boolean deleteCardById(int cardId) {
         this.cardRepo.deleteById(cardId);
         return true;
+    }
+
+    @Override
+    public Card addTagToCard(Tag tag, Card card) {
+        card.getTags().add(tag);
+        return card;
     }
 }

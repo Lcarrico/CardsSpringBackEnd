@@ -47,4 +47,12 @@ public class LearnerServiceImpl implements LearnerService{
         this.learnerRepo.deleteById(learnerId);
         return true;
     }
+
+    @Override
+    public Learner getByUsernameAndPassword(String username, String password) {
+        Learner learner = this.learnerRepo.findByUsernameAndPassword(username, password);
+        return learner;
+    }
+
+
 }

@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Component
 @Repository
 public interface LearnerRepo extends CrudRepository<Learner, Integer> {
+
+    Learner findByUsernameAndPassword(String username, String password);
 }

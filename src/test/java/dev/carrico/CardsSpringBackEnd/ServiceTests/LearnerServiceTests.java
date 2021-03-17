@@ -55,4 +55,14 @@ public class LearnerServiceTests {
         boolean result = this.ls.deleteLearnerById(2);
         Assertions.assertTrue(result);
     }
+
+    @Test
+    void get_learner_by_username_and_password(){
+        Learner learner = this.ls.getByUsernameAndPassword("carrico", "password");
+        Assertions.assertNotNull(learner);
+
+        learner = this.ls.getByUsernameAndPassword("caafrrico", "passwosdgrd");
+        Assertions.assertNull(learner);
+
+    }
 }

@@ -36,4 +36,13 @@ public class LearnerRepoTests {
         Assertions.assertTrue(learners.size() > 0);
     }
 
+    @Test
+    void get_learner_by_username_and_password(){
+        Learner learner = this.learnerRepo.findByUsernameAndPassword("carrico", "password");
+        Assertions.assertNotNull(learner);
+
+        learner = this.learnerRepo.findByUsernameAndPassword("carrasdico", "passwordsdf");
+        Assertions.assertNull(learner);
+    }
+
 }

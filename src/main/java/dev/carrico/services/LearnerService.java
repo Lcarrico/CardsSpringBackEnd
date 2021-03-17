@@ -14,4 +14,6 @@ public interface LearnerService {
     Learner updateLearner(Learner learner);
 
     boolean deleteLearnerById(int learnerId);
+
+    Learner getByUsernameAndPassword(String username, String password);
 }
