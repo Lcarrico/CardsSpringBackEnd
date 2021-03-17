@@ -1,41 +1,52 @@
-package dev.carrico.RepoTests;
+package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
 import dev.carrico.entities.Card;
-import dev.carrico.repos.CardRepo;
+import dev.carrico.services.CardService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.Set;
 
-
-@Transactional
 @SpringBootTest
-public class CardRepoTests {
+@Transactional
+public class CardServiceTests {
 
     @Autowired
-    CardRepo cardRepo;
+    CardService cs;
 
     @Test
     void create_card(){
         Card card = new Card();
-        card.setQuestion("What is 3+4?");
-        card.setAnswer("7");
+        card.setQuestion("What is love?");
+        card.setAnswer("Baby don't hurt meeee, no moreeee.");
         card.setCreatorId(1);
-        cardRepo.save(card);
-        System.out.println(card);
+        cs.createCard(card);
         Assertions.assertNotEquals(0, card.getCardId());
     }
 
     @Test
-    void get_all_cards(){
-        Set<Card> cards = new HashSet<>();
-        this.cardRepo.findAll().forEach(cards::add);
-        System.out.println(cards);
-        Assertions.assertTrue(cards.size() > 0);
+    void get_card_by_id(){
+
     }
+
+    @Test
+    void get_all_cards(){
+        Set<Card> cards = cs.getAllCards();
+        System.out.println(cards);
+    }
+
+    @Test
+    void update_card(){
+
+    }
+
+    @Test
+    void delete_card(){
+
+    }
+
 
 }

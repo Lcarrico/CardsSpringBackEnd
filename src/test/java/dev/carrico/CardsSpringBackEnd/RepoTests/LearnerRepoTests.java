@@ -1,4 +1,4 @@
-package dev.carrico.RepoTests;
+package dev.carrico.CardsSpringBackEnd.RepoTests;
 
 import dev.carrico.entities.Learner;
 import dev.carrico.repos.LearnerRepo;
