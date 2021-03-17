@@ -16,7 +16,7 @@ public class Learner {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "passname")
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
