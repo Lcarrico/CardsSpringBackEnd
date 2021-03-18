@@ -58,17 +58,18 @@ public class LearnerServiceImpl implements LearnerService{
     }
 
     @Override
-    public Learner addStackToLearner(Stack stack, Learner learner) {
+    public Learner addStackToLearner(Learner learner, Stack stack) {
         learner.getStacks().add(stack);
         this.learnerRepo.save(learner);
         return learner;
     }
 
     @Override
-    public Learner removeStackFromLearner(Stack stack, Learner learner) {
+    public Learner removeStackFromLearner(Learner learner, Stack stack) {
         for (Stack temp : learner.getStacks()){
             if (temp.getStackId() == stack.getStackId()){
                 learner.getStacks().remove(temp);
+                break;
             }
         }
         this.learnerRepo.save(learner);

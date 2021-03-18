@@ -55,7 +55,7 @@ public class CardController {
     public Card addTagToCard(@PathVariable int cardId, @PathVariable int tagId) {
         Card card = this.cardService.getCardById(cardId);
         Tag tag = this.tagService.getTagById(tagId);
-        this.cardService.addTagToCard(tag, card);
+        this.cardService.addTagToCard(card, tag);
         return card;
     }
 

@@ -18,7 +18,7 @@ public interface LearnerService {
 
     Learner getByUsernameAndPassword(String username, String password);
 
-    Learner addStackToLearner(Stack stack, Learner learner);
+    Learner addStackToLearner(Learner learner, Stack stack);
 
-    Learner removeStackFromLearner(Stack stack, Learner learner);
+    Learner removeStackFromLearner(Learner learner, Stack stack);
 }

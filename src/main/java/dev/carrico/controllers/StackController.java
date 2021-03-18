@@ -59,7 +59,7 @@ public class StackController {
     public Stack addCardToStack(@PathVariable int stackId, @PathVariable int cardId){
         Stack stack = this.stackService.getStackById(stackId);
         Card card = this.cardService.getCardById(cardId);
-        this.stackService.addCardToStack(card, stack);
+        this.stackService.addCardToStack(stack, card);
         return stack;
     }
 
@@ -67,7 +67,7 @@ public class StackController {
     public Stack addTagToStack(@PathVariable int stackId, @PathVariable int tagId){
         Stack stack = this.stackService.getStackById(stackId);
         Tag tag = this.tagService.getTagById(tagId);
-        this.stackService.addTagToStack(tag, stack);
+        this.stackService.addTagToStack(stack, tag);
         return stack;
     }
 

@@ -1,7 +1,9 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
 import dev.carrico.entities.Learner;
+import dev.carrico.entities.Stack;
 import dev.carrico.services.LearnerService;
+import dev.carrico.services.StackService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class LearnerServiceTests {
 
     @Autowired
     LearnerService ls;
+
+    @Autowired
+    StackService ss;
 
     @Test
     void create_learner(){
@@ -68,11 +73,23 @@ public class LearnerServiceTests {
 
     @Test
     void add_stack_to_learner(){
-        //TODO
+        Learner learner = this.ls.getLearnerById(2);
+        Stack stack = this.ss.getStackById(1);
+
+        this.ls.addStackToLearner(learner, stack);
+
+        learner = this.ls.getLearnerById(2);
+        Assertions.assertTrue(learner.getStacks().size() > 0);
     }
 
     @Test
     void remove_stack_from_learner(){
+        Learner learner = this.ls.getLearnerById(2);
+        Stack stack = this.ss.getStackById(1);
 
+        this.ls.removeStackFromLearner(learner, stack);
+
+        learner = this.ls.getLearnerById(2);
+        Assertions.assertTrue(!learner.getStacks().contains(stack));
     }
 }

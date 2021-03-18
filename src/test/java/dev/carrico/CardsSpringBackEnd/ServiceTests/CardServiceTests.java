@@ -66,7 +66,7 @@ public class CardServiceTests {
         Tag tag = ts.getTagById(7);
         Card card = cs.getCardById(4);
 
-        cs.addTagToCard(tag, card);
+        cs.addTagToCard(card, tag);
 
         Set<Tag> tags = cs.getCardById(4).getTags();
         System.out.println(tags);
@@ -79,7 +79,7 @@ public class CardServiceTests {
         Tag tag = ts.getTagById(7);
         Card card = cs.getCardById(4);
 
-        cs.removeTagFromCard(tag, card);
+        cs.removeTagFromCard(card, tag);
 
         Set<Tag> tags = cs.getCardById(4).getTags();
         Assertions.assertTrue(!tags.contains(tag));

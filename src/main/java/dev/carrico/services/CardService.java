@@ -16,7 +16,7 @@ public interface CardService {
 
     boolean deleteCardById(int cardId);
 
-    Card addTagToCard(Tag tag, Card card);
+    Card addTagToCard(Card card, Tag tag);
 
-    Card removeTagFromCard(Tag tag, Card card);
+    Card removeTagFromCard(Card card, Tag tag);
 }

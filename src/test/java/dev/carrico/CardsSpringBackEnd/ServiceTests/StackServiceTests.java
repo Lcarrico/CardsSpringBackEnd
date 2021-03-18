@@ -77,7 +77,7 @@ public class StackServiceTests {
         Stack stack = this.ss.getStackById(1);
         Card card = this.cs.getCardById(4);
 
-        this.ss.addCardToStack(card, stack);
+        this.ss.addCardToStack(stack, card);
         stack = this.ss.getStackById(1);
 
         Assertions.assertTrue(stack.getCards().size() > 0);
@@ -88,7 +88,7 @@ public class StackServiceTests {
         Stack stack = this.ss.getStackById(1);
         Tag tag  = this.ts.getTagById(7);
 
-        this.ss.addTagToStack(tag, stack);
+        this.ss.addTagToStack(stack, tag);
         stack = this.ss.getStackById(1);
 
         Assertions.assertTrue(stack.getTags().size() > 0);
@@ -97,16 +97,23 @@ public class StackServiceTests {
     @Test
     void remove_tag_from_stack(){
         Tag tag = ts.getTagById(7);
-        Stack stack = ss.getStackById(4);
+        Stack stack = ss.getStackById(1);
 
-        ss.removeTagFromStack(tag, stack);
+        ss.removeTagFromStack(stack, tag);
 
-        Set<Tag> tags = ss.getStackById(4).getTags();
+        Set<Tag> tags = ss.getStackById(1).getTags();
         Assertions.assertTrue(!tags.contains(tag));
     }
 
     @Test
     void remove_card_from_stack(){
-        //TODO
+        Card card = this.cs.getCardById(4);
+        Stack stack = this.ss.getStackById(1);
+
+        this.ss.removeCardFromStack(stack, card);
+
+        stack = this.ss.getStackById(1);
+
+        Assertions.assertTrue(!stack.getCards().contains(card));
     }
 }

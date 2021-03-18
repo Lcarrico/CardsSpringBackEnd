@@ -16,11 +16,11 @@ public interface StackService {
 
     boolean deleteStackById(int stackId);
 
-    Stack addTagToStack(Tag tag, Stack stack);
+    Stack addTagToStack(Stack stack, Tag tag);
 
-    Stack addCardToStack(Card card, Stack stack);
+    Stack addCardToStack(Stack stack, Card card);
 
-    Stack removeTagFromStack(Tag tag, Stack stack);
+    Stack removeTagFromStack(Stack stack, Tag tag);
 
-    Stack removeCardFromStack(Card card, Stack stack);
+    Stack removeCardFromStack(Stack stack, Card card);
 }

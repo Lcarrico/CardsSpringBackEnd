@@ -50,24 +50,25 @@ public class StackServiceImpl implements StackService{
     }
 
     @Override
-    public Stack addTagToStack(Tag tag, Stack stack) {
+    public Stack addTagToStack(Stack stack, Tag tag) {
         stack.getTags().add(tag);
         this.stackRepo.save(stack);
         return stack;
     }
 
     @Override
-    public Stack addCardToStack(Card card, Stack stack) {
+    public Stack addCardToStack(Stack stack, Card card) {
         stack.getCards().add(card);
         this.stackRepo.save(stack);
         return stack;
     }
 
     @Override
-    public Stack removeTagFromStack(Tag tag, Stack stack) {
+    public Stack removeTagFromStack(Stack stack, Tag tag) {
         for (Tag temp : stack.getTags()){
             if (temp.getTagId() == tag.getTagId()){
                 stack.getTags().remove(temp);
+                break;
             }
         }
         this.stackRepo.save(stack);
@@ -75,10 +76,11 @@ public class StackServiceImpl implements StackService{
     }
 
     @Override
-    public Stack removeCardFromStack(Card card, Stack stack) {
+    public Stack removeCardFromStack(Stack stack, Card card) {
         for (Card temp : stack.getCards()){
             if(temp.getCardId() == card.getCardId()){
                 stack.getCards().remove(temp);
+                break;
             }
         }
         this.stackRepo.save(stack);
