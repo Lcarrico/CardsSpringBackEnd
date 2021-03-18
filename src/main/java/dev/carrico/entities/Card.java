@@ -19,10 +19,6 @@ public class Card {
     @Column(name = "answer")
     private String answer;
 
-    @Column(name = "creator_id")
-    @JoinColumn(name="creator_id")
-    private int creatorId;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "card_stack",
         joinColumns = {@JoinColumn(name="card_id")},
@@ -41,7 +37,6 @@ public class Card {
         this.cardId = cardId;
         this.question = question;
         this.answer = answer;
-        this.creatorId = creatorId;
         this.stacks = stacks;
         this.tags = tags;
     }
@@ -74,14 +69,6 @@ public class Card {
         this.answer = answer;
     }
 
-    public int getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(int creatorId) {
-        this.creatorId = creatorId;
-    }
-
     public Set<Stack> getStacks() {
         return stacks;
     }
@@ -104,7 +91,6 @@ public class Card {
                 "cardId=" + cardId +
                 ", question='" + question + '\'' +
                 ", answer='" + answer + '\'' +
-                ", creatorId=" + creatorId +
                 ", tags=" + tags +
                 '}';
     }

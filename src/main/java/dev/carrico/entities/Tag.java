@@ -12,7 +12,7 @@ public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= " tag_id")
+    @Column(name = "tag_id")
     private int tagId;
 
     @Column(name = "tag_name")
@@ -26,19 +26,10 @@ public class Tag {
     )
     private Set<Card> cards = new HashSet<>();
 
-    @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "stack_tag",
-            joinColumns = {@JoinColumn(name="tag_id")},
-            inverseJoinColumns = {@JoinColumn(name="stack_id")}
-    )
-    private Set<Stack> stacks = new HashSet<>();
-
-    public Tag(int tagId, String tagName, Set<Card> cards, Set<Stack> stacks) {
+    public Tag(int tagId, String tagName, Set<Card> cards) {
         this.tagId = tagId;
         this.tagName = tagName;
         this.cards = cards;
-        this.stacks = stacks;
     }
 
     public Tag(){}
@@ -65,14 +56,6 @@ public class Tag {
 
     public void setCards(Set<Card> cards) {
         this.cards = cards;
-    }
-
-    public Set<Stack> getStacks() {
-        return stacks;
-    }
-
-    public void setStacks(Set<Stack> stacks) {
-        this.stacks = stacks;
     }
 
     @Override

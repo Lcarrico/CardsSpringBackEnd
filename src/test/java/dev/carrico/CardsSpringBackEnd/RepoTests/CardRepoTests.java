@@ -24,7 +24,6 @@ public class CardRepoTests {
         Card card = new Card();
         card.setQuestion("What is 3+4?");
         card.setAnswer("7");
-        card.setCreatorId(1);
         cardRepo.save(card);
         System.out.println(card);
         Assertions.assertNotEquals(0, card.getCardId());

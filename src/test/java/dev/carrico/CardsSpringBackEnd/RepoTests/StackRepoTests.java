@@ -23,11 +23,9 @@ public class StackRepoTests {
         Stack stack = new Stack();
         stack.setStackName("Basic Math");
         stack.setDescription("Very basic single digit math problems.");
-        stack.setCreatorId(1);
         stackRepo.save(stack);
         System.out.println(stack);
         Assertions.assertNotEquals(0, stack.getStackId());
-
     }
 
     @Test
@@ -35,6 +33,7 @@ public class StackRepoTests {
         Set<Stack> stacks = new HashSet<>();
         this.stackRepo.findAll().forEach(stacks::add);
         System.out.println(stacks);
+        stacks.forEach(stack -> System.out.println(stack.getLearners()));
         Assertions.assertTrue(stacks.size() > 0);
     }
 

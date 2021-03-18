@@ -20,7 +20,7 @@ public class Learner {
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "learner_stack",
+    @JoinTable(name = "stack_link",
             joinColumns = {@JoinColumn(name="learner_id")},
             inverseJoinColumns = {@JoinColumn(name="stack_id")}
     )

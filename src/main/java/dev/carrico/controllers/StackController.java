@@ -3,9 +3,11 @@ package dev.carrico.controllers;
 import dev.carrico.entities.Card;
 import dev.carrico.entities.Stack;
 import dev.carrico.entities.Tag;
+import dev.carrico.entities.Topic;
 import dev.carrico.services.CardService;
 import dev.carrico.services.StackService;
 import dev.carrico.services.TagService;
+import dev.carrico.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,7 @@ public class StackController {
     CardService cardService;
 
     @Autowired
-    TagService tagService;
+    TopicService topicService;
 
     @PostMapping("/stacks")
     public Stack createStack(@RequestBody Stack stack){
@@ -66,19 +68,19 @@ public class StackController {
 
     @PostMapping("/stacks/{stackId}/tags/{tagId}")
     @PutMapping("/stacks/{stackId}/tags/{tagId}")
-    public Stack addTagToStack(@PathVariable int stackId, @PathVariable int tagId){
+    public Stack addTopicToStack(@PathVariable int stackId, @PathVariable int topicId){
         Stack stack = this.stackService.getStackById(stackId);
-        Tag tag = this.tagService.getTagById(tagId);
-        this.stackService.addTagToStack(stack, tag);
+        Topic topic = this.topicService.getTopicById(topicId);
+        this.stackService.addTopicToStack(stack, topic);
         return stack;
     }
 
     @DeleteMapping("/stacks/{stackId}/tags/{tagId}")
-    public Boolean removeTagFromStack(@PathVariable int stackId, @PathVariable int tagId){
+    public Boolean removeTagFromStack(@PathVariable int stackId, @PathVariable int topicId){
         Stack stack = this.stackService.getStackById(stackId);
-        Tag tag = this.tagService.getTagById(tagId);
+        Topic topic = this.topicService.getTopicById(topicId);
 
-        Boolean result = this.stackService.removeTagFromStack(stack, tag);
+        Boolean result = this.stackService.removeTopicFromStack(stack, topic);
         return result;
     }
 

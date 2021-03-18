@@ -20,13 +20,9 @@ public class Stack {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "creator_id")
-    @JoinColumn(name = "creator_id")
-    private int creatorId;
-
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "learner_stack",
+    @JoinTable(name = "stack_link",
             joinColumns = {@JoinColumn(name="stack_id")},
             inverseJoinColumns = {@JoinColumn(name="learner_id")}
     )
@@ -40,20 +36,19 @@ public class Stack {
     private Set<Card> cards = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "stack_tag",
+    @JoinTable(name = "stack_topic",
             joinColumns = {@JoinColumn(name="stack_id")},
-            inverseJoinColumns = {@JoinColumn(name="tag_id")}
+            inverseJoinColumns = {@JoinColumn(name="topic_id")}
     )
-    private Set<Tag> tags = new HashSet<>();
+    private Set<Topic> topics = new HashSet<>();
 
-    public Stack(int stackId, String stackName, String description, int creatorId, Set<Learner> learners, Set<Card> cards, Set<Tag> tags) {
+    public Stack(int stackId, String stackName, String description, int creatorId, Set<Learner> learners, Set<Card> cards, Set<Topic> topics) {
         this.stackId = stackId;
         this.stackName = stackName;
         this.description = description;
-        this.creatorId = creatorId;
         this.learners = learners;
         this.cards = cards;
-        this.tags = tags;
+        this.topics = topics;
     }
 
     public Stack(){}
@@ -82,14 +77,6 @@ public class Stack {
         this.description = description;
     }
 
-    public int getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(int creatorId) {
-        this.creatorId = creatorId;
-    }
-
     public Set<Learner> getLearners() {
         return learners;
     }
@@ -106,12 +93,12 @@ public class Stack {
         this.cards = cards;
     }
 
-    public Set<Tag> getTags() {
-        return tags;
+    public Set<Topic> getTopics() {
+        return topics;
     }
 
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
+    public void setTags(Set<Topic> topics) {
+        this.topics = topics;
     }
 
     @Override
@@ -120,9 +107,8 @@ public class Stack {
                 "stackId=" + stackId +
                 ", stackName='" + stackName + '\'' +
                 ", description='" + description + '\'' +
-                ", creatorId=" + creatorId +
                 ", cards=" + cards +
-                ", tags=" + tags +
+                ", topics=" + topics +
                 '}';
     }
 }

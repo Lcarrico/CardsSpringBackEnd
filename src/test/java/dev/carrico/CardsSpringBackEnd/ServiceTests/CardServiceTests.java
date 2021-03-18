@@ -28,7 +28,6 @@ public class CardServiceTests {
         Card card = new Card();
         card.setQuestion("What is love?");
         card.setAnswer("Baby don't hurt meeee, no moreeee.");
-        card.setCreatorId(1);
         this.cs.createCard(card);
         Assertions.assertNotEquals(0, card.getCardId());
     }
