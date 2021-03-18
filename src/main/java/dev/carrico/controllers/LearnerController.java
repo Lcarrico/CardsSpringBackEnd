@@ -1,7 +1,9 @@
 package dev.carrico.controllers;
 
 import dev.carrico.entities.Learner;
+import dev.carrico.entities.Stack;
 import dev.carrico.services.LearnerService;
+import dev.carrico.services.StackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ import java.util.Set;
 public class LearnerController {
     @Autowired
     LearnerService learnerService;
+
+    @Autowired
+    StackService stackService;
 
     @PostMapping("/learners")
     public Learner createLearner(@RequestBody Learner learner){
@@ -45,7 +50,22 @@ public class LearnerController {
         return result;
     }
 
-    // TODO add stack to learner
+    @PostMapping("/learners/{learnerId}/stacks/{stackId}")
+    @PutMapping("/learners/{learnerId}/stacks/{stackId}")
+    public Learner addStackToLearner(@PathVariable int learnerId, @PathVariable int stackId){
+        Learner learner = this.learnerService.getLearnerById(learnerId);
+        Stack stack = this.stackService.getStackById(stackId);
 
-    // TODO remove stack from learner
+        this.learnerService.addStackToLearner(learner, stack);
+        return learner;
+    }
+
+    @DeleteMapping("/learners/")
+    public Boolean removeStackFromLearner(@PathVariable int learnerId, @PathVariable int stackId){
+        Learner learner = this.learnerService.getLearnerById(learnerId);
+        Stack stack = this.stackService.getStackById(stackId);
+
+        Boolean result = this.learnerService.removeStackFromLearner(learner, stack);
+        return result;
+    }
 }

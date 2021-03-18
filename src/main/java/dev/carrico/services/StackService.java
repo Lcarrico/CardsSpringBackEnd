@@ -20,7 +20,7 @@ public interface StackService {
 
     Stack addCardToStack(Stack stack, Card card);
 
-    Stack removeTagFromStack(Stack stack, Tag tag);
+    boolean removeTagFromStack(Stack stack, Tag tag);
 
-    Stack removeCardFromStack(Stack stack, Card card);
+    boolean removeCardFromStack(Stack stack, Card card);
 }

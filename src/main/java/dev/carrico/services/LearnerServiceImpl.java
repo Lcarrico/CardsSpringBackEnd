@@ -65,7 +65,7 @@ public class LearnerServiceImpl implements LearnerService{
     }
 
     @Override
-    public Learner removeStackFromLearner(Learner learner, Stack stack) {
+    public boolean removeStackFromLearner(Learner learner, Stack stack) {
         for (Stack temp : learner.getStacks()){
             if (temp.getStackId() == stack.getStackId()){
                 learner.getStacks().remove(temp);
@@ -73,7 +73,7 @@ public class LearnerServiceImpl implements LearnerService{
             }
         }
         this.learnerRepo.save(learner);
-        return learner;
+        return true;
     }
 
 

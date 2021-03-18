@@ -64,7 +64,7 @@ public class StackServiceImpl implements StackService{
     }
 
     @Override
-    public Stack removeTagFromStack(Stack stack, Tag tag) {
+    public boolean removeTagFromStack(Stack stack, Tag tag) {
         for (Tag temp : stack.getTags()){
             if (temp.getTagId() == tag.getTagId()){
                 stack.getTags().remove(temp);
@@ -72,11 +72,11 @@ public class StackServiceImpl implements StackService{
             }
         }
         this.stackRepo.save(stack);
-        return stack;
+        return true;
     }
 
     @Override
-    public Stack removeCardFromStack(Stack stack, Card card) {
+    public boolean removeCardFromStack(Stack stack, Card card) {
         for (Card temp : stack.getCards()){
             if(temp.getCardId() == card.getCardId()){
                 stack.getCards().remove(temp);
@@ -84,8 +84,7 @@ public class StackServiceImpl implements StackService{
             }
         }
         this.stackRepo.save(stack);
-        return stack;
+        return true;
     }
-
 
 }

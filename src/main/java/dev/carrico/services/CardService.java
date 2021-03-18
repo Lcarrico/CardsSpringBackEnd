@@ -18,5 +18,5 @@ public interface CardService {
 
     Card addTagToCard(Card card, Tag tag);
 
-    Card removeTagFromCard(Card card, Tag tag);
+    boolean removeTagFromCard(Card card, Tag tag);
 }

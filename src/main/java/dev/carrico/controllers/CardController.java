@@ -51,6 +51,7 @@ public class CardController {
         return result;
     }
 
+    @PostMapping("/cards/{cardId}/tags/{tagId}")
     @PutMapping("/cards/{cardId}/tags/{tagId}")
     public Card addTagToCard(@PathVariable int cardId, @PathVariable int tagId) {
         Card card = this.cardService.getCardById(cardId);
@@ -59,6 +60,13 @@ public class CardController {
         return card;
     }
 
-    //TODO delete tag from card
+    @DeleteMapping("/cards/{cardId}/tags/{tagId}")
+    public Boolean removeTagFromCard(@PathVariable int cardId, @PathVariable int tagId){
+        Card card = this.cardService.getCardById(cardId);
+        Tag tag = this.tagService.getTagById(tagId);
+
+        Boolean result = this.cardService.removeTagFromCard(card, tag);
+        return result;
+    }
 
 }

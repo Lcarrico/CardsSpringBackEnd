@@ -56,7 +56,7 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card removeTagFromCard(Card card, Tag tag) {
+    public boolean removeTagFromCard(Card card, Tag tag) {
         for (Tag temp : card.getTags()){
             if (temp.getTagId() == tag.getTagId()) {
                 card.getTags().remove(temp);
@@ -64,6 +64,6 @@ public class CardServiceImpl implements CardService{
             }
         }
         this.cardRepo.save(card);
-        return card;
+        return true;
     }
 }

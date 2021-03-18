@@ -55,6 +55,7 @@ public class StackController {
         return result;
     }
 
+    @PostMapping("/stacks/{stackId}/cards/{cardId}")
     @PutMapping("/stacks/{stackId}/cards/{cardId}")
     public Stack addCardToStack(@PathVariable int stackId, @PathVariable int cardId){
         Stack stack = this.stackService.getStackById(stackId);
@@ -63,6 +64,7 @@ public class StackController {
         return stack;
     }
 
+    @PostMapping("/stacks/{stackId}/tags/{tagId}")
     @PutMapping("/stacks/{stackId}/tags/{tagId}")
     public Stack addTagToStack(@PathVariable int stackId, @PathVariable int tagId){
         Stack stack = this.stackService.getStackById(stackId);
@@ -71,7 +73,21 @@ public class StackController {
         return stack;
     }
 
-    // TODO remove card from stack
+    @DeleteMapping("/stacks/{stackId}/tags/{tagId}")
+    public Boolean removeTagFromStack(@PathVariable int stackId, @PathVariable int tagId){
+        Stack stack = this.stackService.getStackById(stackId);
+        Tag tag = this.tagService.getTagById(tagId);
 
-    // TODO remove tag from stack
+        Boolean result = this.stackService.removeTagFromStack(stack, tag);
+        return result;
+    }
+
+    @DeleteMapping("/stacks/{stackId}/cards/{cardsId}")
+    public Boolean removeCardFromStack(@PathVariable int stackId, @PathVariable int cardId){
+        Stack stack = this.stackService.getStackById(stackId);
+        Card card = this.cardService.getCardById(cardId);
+
+        Boolean result = this.stackService.removeCardFromStack(stack, card);
+        return result;
+    }
 }

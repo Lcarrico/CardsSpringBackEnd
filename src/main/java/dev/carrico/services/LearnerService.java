@@ -20,5 +20,5 @@ public interface LearnerService {
 
     Learner addStackToLearner(Learner learner, Stack stack);
 
-    Learner removeStackFromLearner(Learner learner, Stack stack);
+    boolean removeStackFromLearner(Learner learner, Stack stack);
 }
