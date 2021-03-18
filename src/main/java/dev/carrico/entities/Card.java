@@ -105,7 +105,6 @@ public class Card {
                 ", question='" + question + '\'' +
                 ", answer='" + answer + '\'' +
                 ", creatorId=" + creatorId +
-                ", stacks=" + stacks +
                 ", tags=" + tags +
                 '}';
     }

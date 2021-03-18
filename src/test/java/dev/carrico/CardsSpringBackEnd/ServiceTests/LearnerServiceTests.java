@@ -65,4 +65,14 @@ public class LearnerServiceTests {
         Assertions.assertNull(learner);
 
     }
+
+    @Test
+    void add_stack_to_learner(){
+        //TODO
+    }
+
+    @Test
+    void remove_stack_from_learner(){
+
+    }
 }

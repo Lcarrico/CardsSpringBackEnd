@@ -44,4 +44,8 @@ public class LearnerController {
         Boolean result = this.learnerService.deleteLearnerById(learnerId);
         return result;
     }
+
+    // TODO add stack to learner
+
+    // TODO remove stack from learner
 }

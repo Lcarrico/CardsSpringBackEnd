@@ -51,6 +51,17 @@ public class CardServiceImpl implements CardService{
     @Override
     public Card addTagToCard(Tag tag, Card card) {
         card.getTags().add(tag);
+        this.cardRepo.save(card);
+        return card;
+    }
+
+    @Override
+    public Card removeTagFromCard(Tag tag, Card card) {
+        for (Tag temp : card.getTags()){
+            if (temp.getTagId() == tag.getTagId())
+                card.getTags().remove(temp);
+        }
+        this.cardRepo.save(card);
         return card;
     }
 }

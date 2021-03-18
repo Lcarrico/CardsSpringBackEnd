@@ -1,5 +1,7 @@
 package dev.carrico.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +24,7 @@ public class Stack {
     @JoinColumn(name = "creator_id")
     private int creatorId;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "learner_stack",
             joinColumns = {@JoinColumn(name="stack_id")},
@@ -118,7 +121,6 @@ public class Stack {
                 ", stackName='" + stackName + '\'' +
                 ", description='" + description + '\'' +
                 ", creatorId=" + creatorId +
-                ", learners=" + learners +
                 ", cards=" + cards +
                 ", tags=" + tags +
                 '}';

@@ -1,7 +1,11 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
+import dev.carrico.entities.Card;
 import dev.carrico.entities.Stack;
+import dev.carrico.entities.Tag;
+import dev.carrico.services.CardService;
 import dev.carrico.services.StackService;
+import dev.carrico.services.TagService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,12 @@ import java.util.Set;
 public class StackServiceTests {
     @Autowired
     StackService ss;
+
+    @Autowired
+    CardService cs;
+
+    @Autowired
+    TagService ts;
 
     @Test
     void create_stack(){
@@ -60,5 +70,43 @@ public class StackServiceTests {
         boolean result = ss.deleteStackById(1);
 
         Assertions.assertTrue(result);
+    }
+
+    @Test
+    void add_card_to_stack(){
+        Stack stack = this.ss.getStackById(1);
+        Card card = this.cs.getCardById(4);
+
+        this.ss.addCardToStack(card, stack);
+        stack = this.ss.getStackById(1);
+
+        Assertions.assertTrue(stack.getCards().size() > 0);
+    }
+
+    @Test
+    void add_tag_to_stack(){
+        Stack stack = this.ss.getStackById(1);
+        Tag tag  = this.ts.getTagById(7);
+
+        this.ss.addTagToStack(tag, stack);
+        stack = this.ss.getStackById(1);
+
+        Assertions.assertTrue(stack.getTags().size() > 0);
+    }
+
+    @Test
+    void remove_tag_from_stack(){
+        Tag tag = ts.getTagById(7);
+        Stack stack = ss.getStackById(4);
+
+        ss.removeTagFromStack(tag, stack);
+
+        Set<Tag> tags = ss.getStackById(4).getTags();
+        Assertions.assertTrue(!tags.contains(tag));
+    }
+
+    @Test
+    void remove_card_from_stack(){
+        //TODO
     }
 }

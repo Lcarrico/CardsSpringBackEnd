@@ -1,5 +1,7 @@
 package dev.carrico.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class Tag {
     @Column(name = "tag_name")
     private String tagName;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "card_tag",
             joinColumns = {@JoinColumn(name="tag_id")},
@@ -23,6 +26,7 @@ public class Tag {
     )
     private Set<Card> cards = new HashSet<>();
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "stack_tag",
             joinColumns = {@JoinColumn(name="tag_id")},
@@ -76,8 +80,6 @@ public class Tag {
         return "Tag{" +
                 "tagId=" + tagId +
                 ", tagName='" + tagName + '\'' +
-                ", cards=" + cards +
-                ", stacks=" + stacks +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package dev.carrico.services;
 
 import dev.carrico.entities.Learner;
+import dev.carrico.entities.Stack;
 
 import java.util.Set;
 
@@ -16,4 +17,8 @@ public interface LearnerService {
     boolean deleteLearnerById(int learnerId);
 
     Learner getByUsernameAndPassword(String username, String password);
+
+    Learner addStackToLearner(Stack stack, Learner learner);
+
+    Learner removeStackFromLearner(Stack stack, Learner learner);
 }

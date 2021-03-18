@@ -1,7 +1,9 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
 import dev.carrico.entities.Card;
+import dev.carrico.entities.Tag;
 import dev.carrico.services.CardService;
+import dev.carrico.services.TagService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class CardServiceTests {
 
     @Autowired
     CardService cs;
+
+    @Autowired
+    TagService ts;
 
     @Test
     void create_card(){
@@ -54,6 +59,31 @@ public class CardServiceTests {
     void delete_card(){
         boolean result = this.cs.deleteCardById(3);
         Assertions.assertTrue(result);
+    }
+
+    @Test
+    void add_tag_to_card(){
+        Tag tag = ts.getTagById(7);
+        Card card = cs.getCardById(4);
+
+        cs.addTagToCard(tag, card);
+
+        Set<Tag> tags = cs.getCardById(4).getTags();
+        System.out.println(tags);
+        Assertions.assertTrue(tags.size() > 0);
+
+    }
+
+    @Test
+    void remove_tag_from_card(){
+        Tag tag = ts.getTagById(7);
+        Card card = cs.getCardById(4);
+
+        cs.removeTagFromCard(tag, card);
+
+        Set<Tag> tags = cs.getCardById(4).getTags();
+        Assertions.assertTrue(!tags.contains(tag));
+
     }
 
 
