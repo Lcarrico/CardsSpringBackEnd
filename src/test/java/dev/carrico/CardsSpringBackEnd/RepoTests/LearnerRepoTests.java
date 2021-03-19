@@ -33,7 +33,14 @@ public class LearnerRepoTests {
         Set<Learner> learners = new HashSet<>();
         this.learnerRepo.findAll().forEach(learners::add);
         System.out.println(learners);
+
         Assertions.assertTrue(learners.size() > 0);
+    }
+
+    @Test
+    void get_learner_by_id(){
+        Learner learner = this.learnerRepo.findById(1).get();
+        Assertions.assertEquals(1, learner.getLearnerId());
     }
 
     @Test
@@ -45,4 +52,29 @@ public class LearnerRepoTests {
         Assertions.assertNull(learner);
     }
 
+    @Test
+    void update_learner(){
+        Learner learner = this.learnerRepo.findById(1).get();
+        learner.setPassword("new pass");
+        this.learnerRepo.save(learner);
+        learner = this.learnerRepo.findById(1).get();
+
+        Assertions.assertTrue(learner.getPassword().equals("new pass"));
+
+    }
+
+    @Test
+    void delete_learner(){
+        Learner learner = this.learnerRepo.findById(1).get();
+        this.learnerRepo.delete(learner);
+
+        Assertions.assertNull(this.learnerRepo.findById(1));
+    }
+
+    @Test
+    void delete_learner_by_id(){
+        this.learnerRepo.deleteById(1);
+
+        Assertions.assertNull(this.learnerRepo.findById(1));
+    }
 }

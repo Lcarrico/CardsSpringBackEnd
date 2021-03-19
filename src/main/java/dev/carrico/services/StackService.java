@@ -17,11 +17,11 @@ public interface StackService {
 
     boolean deleteStackById(int stackId);
 
-    Stack addTopicToStack(Stack stack, Topic topic);
-
-    Stack addCardToStack(Stack stack, Card card);
-
-    boolean removeTopicFromStack(Stack stack, Topic topic);
-
-    boolean removeCardFromStack(Stack stack, Card card);
+//    Stack addTopicToStack(Stack stack, Topic topic);
+//
+//    Stack addCardToStack(Stack stack, Card card);
+//
+//    boolean removeTopicFromStack(Stack stack, Topic topic);
+//
+//    boolean removeCardFromStack(Stack stack, Card card);
 }

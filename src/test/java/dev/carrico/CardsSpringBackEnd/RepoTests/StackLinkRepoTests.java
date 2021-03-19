@@ -1,0 +1,71 @@
+package dev.carrico.CardsSpringBackEnd.RepoTests;
+
+import dev.carrico.entities.StackLink;
+import dev.carrico.repos.StackLinkRepo;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@SpringBootTest
+@Transactional
+public class StackLinkRepoTests {
+    
+    @Autowired
+    StackLinkRepo stackLinkRepo;
+    
+    @Test
+    void create_stack_link(){
+        StackLink stackLink = new StackLink();
+        stackLink.setStackId(1);
+        stackLink.setLearnerId(1);
+        stackLink.setRelationship("Creator");
+        this.stackLinkRepo.save(stackLink);
+        System.out.println(stackLink);
+
+        Assertions.assertNotEquals(0, stackLink.getStackLinkId());
+    }
+    
+    @Test
+    void get_all_stack_links(){
+        Set<StackLink> stackLinks = new HashSet<>();
+        this.stackLinkRepo.findAll().forEach(stackLinks::add);
+        System.out.println(stackLinks);
+
+        Assertions.assertTrue(stackLinks.size() > 0);
+    }
+
+    @Test
+    void get_stack_links_by_learner_id(){
+        // TODO
+    }
+
+    @Test
+    void get_stack_links_by_stack_id(){
+        // TODO
+    }
+
+    @Test
+    void get_stack_links_by_relationship(){
+        // TODO
+    }
+
+    @Test
+    void delete_stack_link(){
+        StackLink stackLink = this.stackLinkRepo.findById(1).get();
+        this.stackLinkRepo.delete(stackLink);
+
+        Assertions.assertNull(this.stackLinkRepo.findById(1));
+    }
+
+    @Test
+    void delete_stack_link_by_id(){
+        this.stackLinkRepo.deleteById(1);
+
+        Assertions.assertNull(this.stackLinkRepo.findById(1));
+    }
+}

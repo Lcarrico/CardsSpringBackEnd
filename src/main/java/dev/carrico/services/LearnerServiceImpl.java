@@ -56,25 +56,4 @@ public class LearnerServiceImpl implements LearnerService{
         Learner learner = this.learnerRepo.findByUsernameAndPassword(username, password);
         return learner;
     }
-
-    @Override
-    public Learner addStackToLearner(Learner learner, Stack stack) {
-        learner.getStacks().add(stack);
-        this.learnerRepo.save(learner);
-        return learner;
-    }
-
-    @Override
-    public boolean removeStackFromLearner(Learner learner, Stack stack) {
-        for (Stack temp : learner.getStacks()){
-            if (temp.getStackId() == stack.getStackId()){
-                learner.getStacks().remove(temp);
-                break;
-            }
-        }
-        this.learnerRepo.save(learner);
-        return true;
-    }
-
-
 }

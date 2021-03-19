@@ -71,25 +71,25 @@ public class LearnerServiceTests {
 
     }
 
-    @Test
-    void add_stack_to_learner(){
-        Learner learner = this.ls.getLearnerById(2);
-        Stack stack = this.ss.getStackById(1);
+//    @Test
+//    void add_stack_to_learner(){
+//        Learner learner = this.ls.getLearnerById(2);
+//        Stack stack = this.ss.getStackById(1);
+//
+//        this.ls.addStackToLearner(learner, stack);
+//
+//        learner = this.ls.getLearnerById(2);
+//        Assertions.assertTrue(learner.getStacks().size() > 0);
+//    }
 
-        this.ls.addStackToLearner(learner, stack);
-
-        learner = this.ls.getLearnerById(2);
-        Assertions.assertTrue(learner.getStacks().size() > 0);
-    }
-
-    @Test
-    void remove_stack_from_learner(){
-        Learner learner = this.ls.getLearnerById(2);
-        Stack stack = this.ss.getStackById(1);
-
-        this.ls.removeStackFromLearner(learner, stack);
-
-        learner = this.ls.getLearnerById(2);
-        Assertions.assertTrue(!learner.getStacks().contains(stack));
-    }
+//    @Test
+//    void remove_stack_from_learner(){
+//        Learner learner = this.ls.getLearnerById(2);
+//        Stack stack = this.ss.getStackById(1);
+//
+//        this.ls.removeStackFromLearner(learner, stack);
+//
+//        learner = this.ls.getLearnerById(2);
+//        Assertions.assertTrue(!learner.getStacks().contains(stack));
+//    }
 }

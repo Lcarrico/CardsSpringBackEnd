@@ -56,7 +56,7 @@ public class LearnerController {
         Learner learner = this.learnerService.getLearnerById(learnerId);
         Stack stack = this.stackService.getStackById(stackId);
 
-        this.learnerService.addStackToLearner(learner, stack);
+//        this.learnerService.addStackToLearner(learner, stack);
         return learner;
     }
 
@@ -65,7 +65,7 @@ public class LearnerController {
         Learner learner = this.learnerService.getLearnerById(learnerId);
         Stack stack = this.stackService.getStackById(stackId);
 
-        Boolean result = this.learnerService.removeStackFromLearner(learner, stack);
-        return result;
+//        Boolean result = this.learnerService.removeStackFromLearner(learner, stack);
+        return true;
     }
 }

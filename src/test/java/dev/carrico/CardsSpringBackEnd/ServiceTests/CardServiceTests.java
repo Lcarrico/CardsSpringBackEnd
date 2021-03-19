@@ -59,31 +59,4 @@ public class CardServiceTests {
         boolean result = this.cs.deleteCardById(3);
         Assertions.assertTrue(result);
     }
-
-    @Test
-    void add_tag_to_card(){
-        Tag tag = ts.getTagById(7);
-        Card card = cs.getCardById(4);
-
-        cs.addTagToCard(card, tag);
-
-        Set<Tag> tags = cs.getCardById(4).getTags();
-        System.out.println(tags);
-        Assertions.assertTrue(tags.size() > 0);
-
-    }
-
-    @Test
-    void remove_tag_from_card(){
-        Tag tag = ts.getTagById(7);
-        Card card = cs.getCardById(4);
-
-        cs.removeTagFromCard(card, tag);
-
-        Set<Tag> tags = cs.getCardById(4).getTags();
-        Assertions.assertTrue(!tags.contains(tag));
-
-    }
-
-
 }

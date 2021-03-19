@@ -48,22 +48,22 @@ public class CardServiceImpl implements CardService{
         return true;
     }
 
-    @Override
-    public Card addTagToCard(Card card, Tag tag) {
-        card.getTags().add(tag);
-        this.cardRepo.save(card);
-        return card;
-    }
-
-    @Override
-    public boolean removeTagFromCard(Card card, Tag tag) {
-        for (Tag temp : card.getTags()){
-            if (temp.getTagId() == tag.getTagId()) {
-                card.getTags().remove(temp);
-                break;
-            }
-        }
-        this.cardRepo.save(card);
-        return true;
-    }
+//    @Override
+//    public Card addTagToCard(Card card, Tag tag) {
+//        card.getTags().add(tag);
+//        this.cardRepo.save(card);
+//        return card;
+//    }
+//
+//    @Override
+//    public boolean removeTagFromCard(Card card, Tag tag) {
+//        for (Tag temp : card.getTags()){
+//            if (temp.getTagId() == tag.getTagId()) {
+//                card.getTags().remove(temp);
+//                break;
+//            }
+//        }
+//        this.cardRepo.save(card);
+//        return true;
+//    }
 }

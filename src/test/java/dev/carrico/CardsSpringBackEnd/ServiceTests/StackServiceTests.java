@@ -71,48 +71,4 @@ public class StackServiceTests {
         Assertions.assertTrue(result);
     }
 
-    @Test
-    void add_card_to_stack(){
-        Stack stack = this.ss.getStackById(1);
-        Card card = this.cs.getCardById(4);
-
-        this.ss.addCardToStack(stack, card);
-        stack = this.ss.getStackById(1);
-
-        Assertions.assertTrue(stack.getCards().size() > 0);
-    }
-
-    @Test
-    void add_topic_to_stack(){
-        Stack stack = this.ss.getStackById(1);
-        Topic topic  = this.ts.getTopicById(7);
-
-        this.ss.addTopicToStack(stack, topic);
-        stack = this.ss.getStackById(1);
-
-        Assertions.assertTrue(stack.getTopics().size() > 0);
-    }
-
-    @Test
-    void remove_tag_from_stack(){
-        Topic topic = ts.getTopicById(7);
-        Stack stack = ss.getStackById(1);
-
-        ss.removeTopicFromStack(stack, topic);
-
-        Set<Topic> topics = ss.getStackById(1).getTopics();
-        Assertions.assertTrue(!topics.contains(topic));
-    }
-
-    @Test
-    void remove_card_from_stack(){
-        Card card = this.cs.getCardById(4);
-        Stack stack = this.ss.getStackById(1);
-
-        this.ss.removeCardFromStack(stack, card);
-
-        stack = this.ss.getStackById(1);
-
-        Assertions.assertTrue(!stack.getCards().contains(card));
-    }
 }

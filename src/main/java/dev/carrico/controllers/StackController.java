@@ -62,7 +62,7 @@ public class StackController {
     public Stack addCardToStack(@PathVariable int stackId, @PathVariable int cardId){
         Stack stack = this.stackService.getStackById(stackId);
         Card card = this.cardService.getCardById(cardId);
-        this.stackService.addCardToStack(stack, card);
+//        this.stackService.addCardToStack(stack, card);
         return stack;
     }
 
@@ -71,7 +71,7 @@ public class StackController {
     public Stack addTopicToStack(@PathVariable int stackId, @PathVariable int topicId){
         Stack stack = this.stackService.getStackById(stackId);
         Topic topic = this.topicService.getTopicById(topicId);
-        this.stackService.addTopicToStack(stack, topic);
+//        this.stackService.addTopicToStack(stack, topic);
         return stack;
     }
 
@@ -80,8 +80,8 @@ public class StackController {
         Stack stack = this.stackService.getStackById(stackId);
         Topic topic = this.topicService.getTopicById(topicId);
 
-        Boolean result = this.stackService.removeTopicFromStack(stack, topic);
-        return result;
+//        Boolean result = this.stackService.removeTopicFromStack(stack, topic);
+        return true;
     }
 
     @DeleteMapping("/stacks/{stackId}/cards/{cardsId}")
@@ -89,7 +89,7 @@ public class StackController {
         Stack stack = this.stackService.getStackById(stackId);
         Card card = this.cardService.getCardById(cardId);
 
-        Boolean result = this.stackService.removeCardFromStack(stack, card);
-        return result;
+//        Boolean result = this.stackService.removeCardFromStack(stack, card);
+        return true;
     }
 }

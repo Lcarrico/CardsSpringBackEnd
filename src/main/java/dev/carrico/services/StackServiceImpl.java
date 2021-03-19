@@ -49,42 +49,42 @@ public class StackServiceImpl implements StackService{
         return true;
     }
 
-    @Override
-    public Stack addTopicToStack(Stack stack, Topic topic) {
-        stack.getTopics().add(topic);
-        this.stackRepo.save(stack);
-        return stack;
-    }
-
-    @Override
-    public Stack addCardToStack(Stack stack, Card card) {
-        stack.getCards().add(card);
-        this.stackRepo.save(stack);
-        return stack;
-    }
-
-    @Override
-    public boolean removeTopicFromStack(Stack stack, Topic tag) {
-        for (Topic temp : stack.getTopics()){
-            if (temp.getTopicId() == tag.getTopicId()){
-                stack.getTopics().remove(temp);
-                break;
-            }
-        }
-        this.stackRepo.save(stack);
-        return true;
-    }
-
-    @Override
-    public boolean removeCardFromStack(Stack stack, Card card) {
-        for (Card temp : stack.getCards()){
-            if(temp.getCardId() == card.getCardId()){
-                stack.getCards().remove(temp);
-                break;
-            }
-        }
-        this.stackRepo.save(stack);
-        return true;
-    }
+//    @Override
+//    public Stack addTopicToStack(Stack stack, Topic topic) {
+//        stack.getTopics().add(topic);
+//        this.stackRepo.save(stack);
+//        return stack;
+//    }
+//
+//    @Override
+//    public Stack addCardToStack(Stack stack, Card card) {
+//        stack.getCards().add(card);
+//        this.stackRepo.save(stack);
+//        return stack;
+//    }
+//
+//    @Override
+//    public boolean removeTopicFromStack(Stack stack, Topic tag) {
+//        for (Topic temp : stack.getTopics()){
+//            if (temp.getTopicId() == tag.getTopicId()){
+//                stack.getTopics().remove(temp);
+//                break;
+//            }
+//        }
+//        this.stackRepo.save(stack);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean removeCardFromStack(Stack stack, Card card) {
+//        for (Card temp : stack.getCards()){
+//            if(temp.getCardId() == card.getCardId()){
+//                stack.getCards().remove(temp);
+//                break;
+//            }
+//        }
+//        this.stackRepo.save(stack);
+//        return true;
+//    }
 
 }

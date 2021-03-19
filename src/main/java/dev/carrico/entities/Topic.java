@@ -19,18 +19,9 @@ public class Topic {
     @Column(name = "topic_name")
     private String topicName;
 
-    @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "stack_topic",
-            joinColumns = {@JoinColumn(name="topic_id")},
-            inverseJoinColumns = {@JoinColumn(name="stack_id")}
-    )
-    private Set<Stack> stacks = new HashSet<>();
-
-    public Topic(int topicId, String topicName, Set<Stack> stacks) {
+    public Topic(int topicId, String topicName) {
         this.topicId = topicId;
         this.topicName = topicName;
-        this.stacks = stacks;
     }
 
     public Topic(){}
@@ -49,14 +40,6 @@ public class Topic {
 
     public void setTopicName(String topicName) {
         this.topicName = topicName;
-    }
-
-    public Set<Stack> getStacks() {
-        return stacks;
-    }
-
-    public void setStacks(Set<Stack> stacks) {
-        this.stacks = stacks;
     }
 
     @Override

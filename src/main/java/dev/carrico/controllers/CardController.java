@@ -56,7 +56,7 @@ public class CardController {
     public Card addTagToCard(@PathVariable int cardId, @PathVariable int tagId) {
         Card card = this.cardService.getCardById(cardId);
         Tag tag = this.tagService.getTagById(tagId);
-        this.cardService.addTagToCard(card, tag);
+//        this.cardService.addTagToCard(card, tag);
         return card;
     }
 
@@ -65,8 +65,8 @@ public class CardController {
         Card card = this.cardService.getCardById(cardId);
         Tag tag = this.tagService.getTagById(tagId);
 
-        Boolean result = this.cardService.removeTagFromCard(card, tag);
-        return result;
+//        Boolean result = this.cardService.removeTagFromCard(card, tag);
+        return true;
     }
 
 }

@@ -25,6 +25,7 @@ public class StackRepoTests {
         stack.setDescription("Very basic single digit math problems.");
         stackRepo.save(stack);
         System.out.println(stack);
+
         Assertions.assertNotEquals(0, stack.getStackId());
     }
 
@@ -33,8 +34,40 @@ public class StackRepoTests {
         Set<Stack> stacks = new HashSet<>();
         this.stackRepo.findAll().forEach(stacks::add);
         System.out.println(stacks);
-        stacks.forEach(stack -> System.out.println(stack.getLearners()));
+
         Assertions.assertTrue(stacks.size() > 0);
+    }
+
+    @Test
+    void get_stack_by_id(){
+        Stack stack = this.stackRepo.findById(1).get();
+
+        Assertions.assertEquals(1, stack.getStackId());
+    }
+
+    @Test
+    void update_stack(){
+        Stack stack = this.stackRepo.findById(1).get();
+        stack.setDescription("a random description");
+        this.stackRepo.save(stack);
+        stack = this.stackRepo.findById(1).get();
+
+        Assertions.assertTrue(stack.getDescription().equals("a random description"));
+    }
+
+    @Test
+    void delete_stack(){
+        Stack stack = this.stackRepo.findById(1).get();
+        this.stackRepo.delete(stack);
+
+        Assertions.assertNull(this.stackRepo.findById(1));
+    }
+
+    @Test
+    void delete_stack_by_id(){
+        this.stackRepo.deleteById(1);
+
+        Assertions.assertNull(this.stackRepo.findById(1));
     }
 
 }

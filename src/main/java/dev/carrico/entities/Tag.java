@@ -18,18 +18,9 @@ public class Tag {
     @Column(name = "tag_name")
     private String tagName;
 
-    @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "card_tag",
-            joinColumns = {@JoinColumn(name="tag_id")},
-            inverseJoinColumns = {@JoinColumn(name="card_id")}
-    )
-    private Set<Card> cards = new HashSet<>();
-
-    public Tag(int tagId, String tagName, Set<Card> cards) {
+    public Tag(int tagId, String tagName) {
         this.tagId = tagId;
         this.tagName = tagName;
-        this.cards = cards;
     }
 
     public Tag(){}
@@ -48,14 +39,6 @@ public class Tag {
 
     public void setTagName(String tagName) {
         this.tagName = tagName;
-    }
-
-    public Set<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(Set<Card> cards) {
-        this.cards = cards;
     }
 
     @Override
