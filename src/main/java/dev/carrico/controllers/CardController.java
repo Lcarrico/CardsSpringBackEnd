@@ -46,7 +46,7 @@ public class CardController {
 
     @DeleteMapping("/cards/{cardId}")
     @ResponseBody
-    public Boolean deleteBookById(@PathVariable int cardId) {
+    public Boolean deleteCardById(@PathVariable int cardId) {
         Boolean result = this.cardService.deleteCardById(cardId);
         return result;
     }

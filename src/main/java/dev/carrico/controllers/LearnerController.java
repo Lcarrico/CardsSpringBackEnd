@@ -53,7 +53,7 @@ public class LearnerController {
 
     @DeleteMapping("/learners/{learnerId}")
     @ResponseBody
-    public Boolean deleteBookById(@PathVariable int learnerId){
+    public Boolean deleteLearnerById(@PathVariable int learnerId){
         Boolean result = this.learnerService.deleteLearnerById(learnerId);
         return result;
     }
