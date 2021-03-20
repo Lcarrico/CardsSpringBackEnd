@@ -31,7 +31,7 @@ public class TagController {
 
     @GetMapping("/tags")
     @ResponseBody
-    public Set<Tag> getTopics(@RequestParam(name = "tagName",defaultValue = "") String tagName){
+    public Set<Tag> getTags(@RequestParam(name = "tagName",defaultValue = "") String tagName){
         Set<Tag> tags;
         if (tagName.isEmpty()){
             tags = this.tagService.getAllTags();
@@ -53,7 +53,7 @@ public class TagController {
 
     @DeleteMapping("/tags/{tagId}")
     @ResponseBody
-    public Boolean deleteBookById(@PathVariable int tagId){
+    public Boolean deleteTagById(@PathVariable int tagId){
         Boolean result = this.tagService.deleteTagById(tagId);
         return result;
     }

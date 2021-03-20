@@ -31,7 +31,7 @@ public class TopicController {
 
     @GetMapping("/topics")
     @ResponseBody
-    public Set<Topic> getAllTopics(@RequestParam(name = "topicName",defaultValue = "") String topicName){
+    public Set<Topic> getTopics(@RequestParam(name = "topicName",defaultValue = "") String topicName){
         Set<Topic> topics;
         if (topicName.isEmpty()){
             topics = this.topicService.getAllTopics();
@@ -53,7 +53,7 @@ public class TopicController {
 
     @DeleteMapping("/topics/{topicId}")
     @ResponseBody
-    public Boolean deleteBookById(@PathVariable int topicId){
+    public Boolean deleteTopicById(@PathVariable int topicId){
         Boolean result = this.topicService.deleteTopicById(topicId);
         return result;
     }

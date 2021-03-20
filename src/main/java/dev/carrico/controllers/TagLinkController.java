@@ -30,7 +30,7 @@ public class TagLinkController {
 
     @GetMapping("/tagLinks")
     @ResponseBody
-    public Set<TagLink> getAllTagLinks(@RequestParam(name = "tagId", defaultValue = "") String tagId,
+    public Set<TagLink> getTagLinks(@RequestParam(name = "tagId", defaultValue = "") String tagId,
                                        @RequestParam(name = "cardId", defaultValue = "") String cardId){
         Set<TagLink> tagLinks = null;
         if (tagId.isEmpty() && cardId.isEmpty()){
