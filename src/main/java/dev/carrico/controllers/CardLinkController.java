@@ -42,13 +42,8 @@ public class CardLinkController {
     @GetMapping("/cardLinks/{cardLinkId")
     @ResponseBody
     public CardLink getCardLinkById(@PathVariable int cardLinkId){
-        try{
-            CardLink cardLink = this.cardLinkService.getCardLinkById(cardLinkId);
-            return cardLink;
-        }catch (EmptyResultDataAccessException emptyResultDataAccessException){
-            emptyResultDataAccessException.printStackTrace();
-            return null;
-        }
+        CardLink cardLink = this.cardLinkService.getCardLinkById(cardLinkId);
+        return cardLink;
     }
 
     @PutMapping("/cardLinks/{cardLinkId")

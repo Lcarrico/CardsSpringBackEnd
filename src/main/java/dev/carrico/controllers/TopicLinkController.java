@@ -32,7 +32,7 @@ public class TopicLinkController {
     @ResponseBody
     public Set<TopicLink> getTopicLinks(@RequestParam(name = "topicId", defaultValue = "") String topicId,
                                        @RequestParam(name = "stackId", defaultValue = "") String stackId){
-        Set<TopicLink> topicLinks;
+        Set<TopicLink> topicLinks = null;
         if (topicId.isEmpty() && stackId.isEmpty()){
             topicLinks = this.topicLinkService.getAllTopicLinks();
         }
@@ -41,9 +41,6 @@ public class TopicLinkController {
         }
         else if (!stackId.isEmpty()){
             topicLinks = this.topicLinkService.getTopicLinksByStackId(Integer.parseInt(stackId));
-        }
-        else {
-            topicLinks = null;
         }
         return topicLinks;
     }

@@ -32,7 +32,7 @@ public class TagLinkController {
     @ResponseBody
     public Set<TagLink> getAllTagLinks(@RequestParam(name = "tagId", defaultValue = "") String tagId,
                                        @RequestParam(name = "cardId", defaultValue = "") String cardId){
-        Set<TagLink> tagLinks;
+        Set<TagLink> tagLinks = null;
         if (tagId.isEmpty() && cardId.isEmpty()){
             tagLinks = this.tagLinkService.getAllTagLinks();
         }
@@ -41,9 +41,6 @@ public class TagLinkController {
         }
         else if (!cardId.isEmpty()){
             tagLinks = this.tagLinkService.getTagLinksByCardId(Integer.parseInt(cardId));
-        }
-        else {
-            tagLinks = null;
         }
         return tagLinks;
     }
