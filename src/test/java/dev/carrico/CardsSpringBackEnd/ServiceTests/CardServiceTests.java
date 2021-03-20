@@ -1,7 +1,9 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
 import dev.carrico.entities.Card;
+import dev.carrico.entities.Tag;
 import dev.carrico.services.CardService;
+import dev.carrico.services.TagService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,14 @@ public class CardServiceTests {
     @Autowired
     CardService cs;
 
+    @Autowired
+    TagService ts;
+
     @Test
     void create_card(){
         Card card = new Card();
         card.setQuestion("What is love?");
         card.setAnswer("Baby don't hurt meeee, no moreeee.");
-        card.setCreatorId(1);
         this.cs.createCard(card);
         Assertions.assertNotEquals(0, card.getCardId());
     }
@@ -55,6 +59,4 @@ public class CardServiceTests {
         boolean result = this.cs.deleteCardById(3);
         Assertions.assertTrue(result);
     }
-
-
 }

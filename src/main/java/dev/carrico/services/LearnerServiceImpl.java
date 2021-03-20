@@ -30,6 +30,13 @@ public class LearnerServiceImpl implements LearnerService{
     }
 
     @Override
+    public Learner getLearnerByUsername(String username){
+        Learner learner = learnerRepo.findByUsername(username);
+        return learner;
+    }
+
+
+    @Override
     public Set<Learner> getAllLearners() {
         Set<Learner> learners = new HashSet<>();
         this.learnerRepo.findAll().forEach(learners::add);

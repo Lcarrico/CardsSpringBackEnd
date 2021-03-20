@@ -12,21 +12,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Transactional
 @SpringBootTest
+@Transactional
 public class CardRepoTests {
 
     @Autowired
-    CardRepo cardRepo;
+    private CardRepo cardRepo;
 
     @Test
     void create_card(){
         Card card = new Card();
         card.setQuestion("What is 3+4?");
         card.setAnswer("7");
-        card.setCreatorId(1);
-        cardRepo.save(card);
+        this.cardRepo.save(card);
         System.out.println(card);
+
         Assertions.assertNotEquals(0, card.getCardId());
     }
 
@@ -35,7 +35,39 @@ public class CardRepoTests {
         Set<Card> cards = new HashSet<>();
         this.cardRepo.findAll().forEach(cards::add);
         System.out.println(cards);
+
         Assertions.assertTrue(cards.size() > 0);
     }
 
+    @Test
+    void get_card_by_id(){
+        Card card = this.cardRepo.findById(1).get();
+        Assertions.assertNotNull(card);
+        Assertions.assertEquals(1, card.getCardId());
+    }
+
+    @Test
+    void update_card(){
+        Card card = this.cardRepo.findById(1).get();
+        card.setAnswer("something different");
+        this.cardRepo.save(card);
+        card = this.cardRepo.findById(1).get();
+
+        Assertions.assertTrue(card.getAnswer().equals("something different"));
+    }
+
+    @Test
+    void delete_card(){
+        Card card = this.cardRepo.findById(1).get();
+        this.cardRepo.delete(card);
+
+        Assertions.assertFalse(this.cardRepo.findById(1).isPresent());
+    }
+
+    @Test
+    void delete_card_by_id(){
+        this.cardRepo.deleteById(1);
+
+        Assertions.assertFalse(this.cardRepo.findById(1).isPresent());
+    }
 }

@@ -13,4 +13,5 @@ public interface StackService {
     Stack updateStack(Stack stack);
 
     boolean deleteStackById(int stackId);
+
 }

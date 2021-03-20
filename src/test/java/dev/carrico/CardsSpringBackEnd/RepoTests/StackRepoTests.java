@@ -23,11 +23,10 @@ public class StackRepoTests {
         Stack stack = new Stack();
         stack.setStackName("Basic Math");
         stack.setDescription("Very basic single digit math problems.");
-        stack.setCreatorId(1);
         stackRepo.save(stack);
         System.out.println(stack);
-        Assertions.assertNotEquals(0, stack.getStackId());
 
+        Assertions.assertNotEquals(0, stack.getStackId());
     }
 
     @Test
@@ -35,7 +34,50 @@ public class StackRepoTests {
         Set<Stack> stacks = new HashSet<>();
         this.stackRepo.findAll().forEach(stacks::add);
         System.out.println(stacks);
+
         Assertions.assertTrue(stacks.size() > 0);
+    }
+
+    @Test
+    void get_stack_by_id(){
+        Stack stack = this.stackRepo.findById(1).get();
+
+        Assertions.assertEquals(1, stack.getStackId());
+    }
+
+    @Test
+    void get_stack_by_stack_name(){
+        // TODO
+    }
+
+    @Test
+    void get_stack_by_stack_description(){
+        // TODO
+    }
+
+    @Test
+    void update_stack(){
+        Stack stack = this.stackRepo.findById(1).get();
+        stack.setDescription("a random description");
+        this.stackRepo.save(stack);
+        stack = this.stackRepo.findById(1).get();
+
+        Assertions.assertTrue(stack.getDescription().equals("a random description"));
+    }
+
+    @Test
+    void delete_stack(){
+        Stack stack = this.stackRepo.findById(1).get();
+        this.stackRepo.delete(stack);
+
+        Assertions.assertFalse(this.stackRepo.findById(1).isPresent());
+    }
+
+    @Test
+    void delete_stack_by_id(){
+        this.stackRepo.deleteById(1);
+
+        Assertions.assertFalse(this.stackRepo.findById(1).isPresent());
     }
 
 }

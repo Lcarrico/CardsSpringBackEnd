@@ -17,7 +17,7 @@ public class TagServiceTests {
     TagService ts;
 
     @Test
-    void create_stack(){
+    void create_tag(){
         Tag tag = new Tag();
         tag.setTagName("Test");
         ts.createTag(tag);
@@ -26,15 +26,15 @@ public class TagServiceTests {
     }
 
     @Test
-    void get_stack_by_id(){
-        Tag tag = ts.getTagById(1);
+    void get_tag_by_id(){
+        Tag tag = ts.getTagById(7);
 
         Assertions.assertNotNull(tag);
         Assertions.assertTrue(tag.getTagName().equals("Math"));
     }
 
     @Test
-    void get_all_stacks(){
+    void get_all_tag(){
         Set<Tag> tags = ts.getAllTags();
 
         Assertions.assertNotNull(tags);
@@ -42,19 +42,19 @@ public class TagServiceTests {
     }
 
     @Test
-    void update_stack(){
+    void update_tag(){
         Tag tag = new Tag();
-        tag.setTagId(1);
+        tag.setTagId(7);
         tag.setTagName("Not Math");
         ts.updateTag(tag);
-        tag = ts.getTagById(1);
+        tag = ts.getTagById(7);
 
         Assertions.assertTrue(tag.getTagName().equals("Not Math"));
     }
 
     @Test
-    void delete_stack(){
-        boolean result = ts.deleteTagById(1);
+    void delete_tag(){
+        boolean result = ts.deleteTagById(7);
 
         Assertions.assertTrue(result);
     }

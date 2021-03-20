@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -15,24 +16,35 @@ public class TagController {
     TagService tagService;
 
     @PostMapping("/tags")
+    @ResponseBody
     public Tag createTag(@RequestBody Tag tag){
         this.tagService.createTag(tag);
         return tag;
     }
 
     @GetMapping("/tags/{tagId}")
+    @ResponseBody
     public Tag getTagById(@PathVariable int tagId){
         Tag tag = this.tagService.getTagById(tagId);
         return tag;
     }
 
     @GetMapping("/tags")
-    public Set<Tag> getAllTags(){
-        Set<Tag> tags = this.tagService.getAllTags();
+    @ResponseBody
+    public Set<Tag> getTopics(@RequestParam(name = "tagName",defaultValue = "") String tagName){
+        Set<Tag> tags;
+        if (tagName.isEmpty()){
+            tags = this.tagService.getAllTags();
+        }
+        else {
+            tags = new HashSet<>();
+            tags.add(this.tagService.getTagByTagName(tagName));
+        }
         return tags;
     }
 
     @PutMapping("/tags/{tagId}")
+    @ResponseBody
     public Tag updateTag(@PathVariable int tagId, @RequestBody Tag tag){
         tag.setTagId(tagId);
         this.tagService.updateTag(tag);
@@ -40,6 +52,7 @@ public class TagController {
     }
 
     @DeleteMapping("/tags/{tagId}")
+    @ResponseBody
     public Boolean deleteBookById(@PathVariable int tagId){
         Boolean result = this.tagService.deleteTagById(tagId);
         return result;

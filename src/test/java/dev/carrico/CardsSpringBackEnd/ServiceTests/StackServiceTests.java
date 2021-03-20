@@ -1,7 +1,11 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
+import dev.carrico.entities.Card;
 import dev.carrico.entities.Stack;
+import dev.carrico.entities.Topic;
+import dev.carrico.services.CardService;
 import dev.carrico.services.StackService;
+import dev.carrico.services.TopicService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +20,15 @@ public class StackServiceTests {
     @Autowired
     StackService ss;
 
+    @Autowired
+    CardService cs;
+
+    @Autowired
+    TopicService ts;
+
     @Test
     void create_stack(){
         Stack stack = new Stack();
-        stack.setCreatorId(1);
         stack.setStackName("Math");
         ss.createStack(stack);
 

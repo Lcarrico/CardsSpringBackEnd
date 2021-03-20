@@ -1,7 +1,9 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
 import dev.carrico.entities.Learner;
+import dev.carrico.entities.Stack;
 import dev.carrico.services.LearnerService;
+import dev.carrico.services.StackService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class LearnerServiceTests {
     @Autowired
     LearnerService ls;
 
+    @Autowired
+    StackService ss;
+
     @Test
     void create_learner(){
         Learner learner = new Learner();
@@ -32,7 +37,6 @@ public class LearnerServiceTests {
     void get_learner_by_id(){
         Learner learner = this.ls.getLearnerById(2);
         Assertions.assertNotNull(learner);
-
     }
 
     @Test
@@ -47,12 +51,17 @@ public class LearnerServiceTests {
         learner.setPassword("passcode123");
         this.ls.updateLearner(learner);
         Assertions.assertEquals("passcode123", this.ls.getLearnerById(2).getPassword());
-
     }
 
     @Test
     void delete_learner_by_id(){
         boolean result = this.ls.deleteLearnerById(2);
         Assertions.assertTrue(result);
+    }
+
+    @Test
+    void get_learner_by_username_and_password(){
+        Learner learner = this.ls.getLearnerByUsername("carrico");
+        Assertions.assertNotNull(learner);
     }
 }

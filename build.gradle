@@ -30,6 +30,7 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-jdbc'
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.postgresql:postgresql'
+	compile group: 'com.auth0', name: 'java-jwt', version: '3.13.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
