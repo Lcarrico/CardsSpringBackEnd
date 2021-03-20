@@ -44,12 +44,9 @@ public class LearnerRepoTests {
     }
 
     @Test
-    void get_learner_by_username_and_password(){
-        Learner learner = this.learnerRepo.findByUsernameAndPassword("carrico", "password");
+    void get_learner_by_username(){
+        Learner learner = this.learnerRepo.findByUsername("carrico");
         Assertions.assertNotNull(learner);
-
-        learner = this.learnerRepo.findByUsernameAndPassword("carrasdico", "passwordsdf");
-        Assertions.assertNull(learner);
     }
 
     @Test
@@ -60,7 +57,6 @@ public class LearnerRepoTests {
         learner = this.learnerRepo.findById(1).get();
 
         Assertions.assertTrue(learner.getPassword().equals("new pass"));
-
     }
 
     @Test

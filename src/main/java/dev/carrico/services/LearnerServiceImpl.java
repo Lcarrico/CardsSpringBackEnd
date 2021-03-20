@@ -1,9 +1,6 @@
 package dev.carrico.services;
 
-import dev.carrico.entities.Card;
 import dev.carrico.entities.Learner;
-import dev.carrico.entities.Stack;
-import dev.carrico.entities.Tag;
 import dev.carrico.repos.LearnerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,6 +30,13 @@ public class LearnerServiceImpl implements LearnerService{
     }
 
     @Override
+    public Learner getLearnerByUsername(String username){
+        Learner learner = learnerRepo.findByUsername(username);
+        return learner;
+    }
+
+
+    @Override
     public Set<Learner> getAllLearners() {
         Set<Learner> learners = new HashSet<>();
         this.learnerRepo.findAll().forEach(learners::add);
@@ -49,11 +53,5 @@ public class LearnerServiceImpl implements LearnerService{
     public boolean deleteLearnerById(int learnerId) {
         this.learnerRepo.deleteById(learnerId);
         return true;
-    }
-
-    @Override
-    public Learner getByUsernameAndPassword(String username, String password) {
-        Learner learner = this.learnerRepo.findByUsernameAndPassword(username, password);
-        return learner;
     }
 }

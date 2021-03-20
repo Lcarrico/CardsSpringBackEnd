@@ -44,12 +44,14 @@ public class TopicLinkRepoTests {
 
     @Test
     void get_topic_links_by_stack_id(){
-        // TODO
+        Set<TopicLink> topicLinks = this.topicLinkRepo.findByStackId(1);
+        Assertions.assertNotNull(topicLinks);
     }
 
     @Test
     void get_topic_links_by_topic_id(){
-        // TODO
+        Set<TopicLink> topicLinks = this.topicLinkRepo.findByTopicId(1);
+        Assertions.assertNotNull(topicLinks);
     }
 
     @Test

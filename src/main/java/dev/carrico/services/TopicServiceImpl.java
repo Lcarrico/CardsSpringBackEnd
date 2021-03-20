@@ -29,6 +29,12 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public Topic getTopicByName(String topicName) {
+        Topic topic = this.topicRepo.findByTopicName(topicName);
+        return topic;
+    }
+
+    @Override
     public Set<Topic> getAllTopics() {
         Set<Topic> topics = new HashSet<>();
         this.topicRepo.findAll().forEach(topics::add);

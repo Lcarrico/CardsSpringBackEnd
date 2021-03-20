@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -27,8 +28,15 @@ public class TagController {
     }
 
     @GetMapping("/tags")
-    public Set<Tag> getAllTags(){
-        Set<Tag> tags = this.tagService.getAllTags();
+    public Set<Tag> getTopics(@RequestParam(name = "tagName",defaultValue = "") String tagName){
+        Set<Tag> tags;
+        if (tagName.isEmpty()){
+            tags = this.tagService.getAllTags();
+        }
+        else {
+            tags = new HashSet<>();
+            tags.add(this.tagService.getTagByTagName(tagName));
+        }
         return tags;
     }
 

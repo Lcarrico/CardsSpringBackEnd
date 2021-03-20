@@ -19,8 +19,20 @@ public class StackLinkServiceImpl implements StackLinkService{
 
     @Override
     public StackLink getStackLinkById(int stackLinkId) {
-        StackLink stackLink = stackLinkRepo.findById(stackLinkId).get();
+        StackLink stackLink = this.stackLinkRepo.findById(stackLinkId).get();
         return stackLink;
+    }
+
+    @Override
+    public Set<StackLink> getStackLinksByLearnerId(int learnerId) {
+        Set<StackLink> stackLinks = this.stackLinkRepo.findByLearnerId(learnerId);
+        return stackLinks;
+    }
+
+    @Override
+    public Set<StackLink> getStackLinksByRelationship(String relationship) {
+        Set<StackLink> stackLinks = this.stackLinkRepo.findByRelationship(relationship);
+        return stackLinks;
     }
 
     @Override

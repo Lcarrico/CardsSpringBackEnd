@@ -46,6 +46,16 @@ public class StackRepoTests {
     }
 
     @Test
+    void get_stack_by_stack_name(){
+        // TODO
+    }
+
+    @Test
+    void get_stack_by_stack_description(){
+        // TODO
+    }
+
+    @Test
     void update_stack(){
         Stack stack = this.stackRepo.findById(1).get();
         stack.setDescription("a random description");

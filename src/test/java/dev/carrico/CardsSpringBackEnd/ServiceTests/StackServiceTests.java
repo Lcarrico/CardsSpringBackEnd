@@ -70,5 +70,4 @@ public class StackServiceTests {
 
         Assertions.assertTrue(result);
     }
-
 }

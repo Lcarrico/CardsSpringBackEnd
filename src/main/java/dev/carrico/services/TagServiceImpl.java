@@ -29,6 +29,12 @@ public class TagServiceImpl implements TagService{
     }
 
     @Override
+    public Tag getTagByTagName(String tagName) {
+        Tag tag = this.tagRepo.findByTagName(tagName);
+        return tag;
+    }
+
+    @Override
     public Set<Tag> getAllTags() {
         Set<Tag> tags = new HashSet<>();
         this.tagRepo.findAll().forEach(tags::add);

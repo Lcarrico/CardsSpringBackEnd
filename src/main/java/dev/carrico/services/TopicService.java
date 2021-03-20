@@ -8,6 +8,7 @@ public interface TopicService {
     Topic createTopic(Topic topic);
 
     Topic getTopicById(int topicId);
+    Topic getTopicByName(String topicName);
     Set<Topic> getAllTopics();
 
     Topic updateTopic(Topic topic);

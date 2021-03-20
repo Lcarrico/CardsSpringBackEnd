@@ -3,12 +3,12 @@ package dev.carrico.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "card_stack")
-public class CardStack {
+@Table(name = "card_link")
+public class CardLink {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "card_stack_id")
-    private int cardStackId;
+    @Column(name = "card_link_id")
+    private int cardLinkId;
 
     @Column(name = "card_id")
     @JoinColumn(name = "card_id")
@@ -18,21 +18,21 @@ public class CardStack {
     @JoinColumn(name = "stack_id")
     private int stackId;
 
-    public CardStack() {
+    public CardLink() {
     }
 
-    public CardStack(int cardStackId, int cardId, int stackId) {
-        this.cardStackId = cardStackId;
+    public CardLink(int cardLinkId, int cardId, int stackId) {
+        this.cardLinkId = cardLinkId;
         this.cardId = cardId;
         this.stackId = stackId;
     }
 
-    public int getCardStackId() {
-        return cardStackId;
+    public int getCardLinkId() {
+        return cardLinkId;
     }
 
-    public void setCardStackId(int cardStackId) {
-        this.cardStackId = cardStackId;
+    public void setCardLinkId(int cardStackId) {
+        this.cardLinkId = cardStackId;
     }
 
     public int getCardId() {
@@ -53,8 +53,8 @@ public class CardStack {
 
     @Override
     public String toString() {
-        return "CardStack{" +
-                "cardStackId=" + cardStackId +
+        return "CardLink{" +
+                "cardLinkId=" + cardLinkId +
                 ", cardId=" + cardId +
                 ", stackId=" + stackId +
                 '}';

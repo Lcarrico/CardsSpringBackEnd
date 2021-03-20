@@ -9,6 +9,7 @@ public interface TagService{
     Tag createTag(Tag tag);
 
     Tag getTagById(int tagId);
+    Tag getTagByTagName(String tagName);
     Set<Tag> getAllTags();
 
     Tag updateTag(Tag tag);

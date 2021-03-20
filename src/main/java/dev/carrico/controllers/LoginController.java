@@ -1,6 +1,5 @@
 package dev.carrico.controllers;
 
-import dev.carrico.entities.Card;
 import dev.carrico.entities.Learner;
 import dev.carrico.services.LearnerService;
 import dev.carrico.utils.JwtUtil;
@@ -21,9 +20,9 @@ public class LoginController {
 
     @PostMapping("/login")
     public String loginLearner(@RequestBody Learner learner){
-        Learner loggedInLearner = learnerService.getByUsernameAndPassword(learner.getUsername(), learner.getPassword());
+        Learner loggedInLearner = learnerService.getLearnerByUsername(learner.getUsername());
 
-        if (loggedInLearner != null){
+        if (loggedInLearner != null && loggedInLearner.getPassword().equals(learner.getPassword())){
             return JwtUtil.generate(loggedInLearner.getUsername(), loggedInLearner.getLearnerId());
         }
 

@@ -37,7 +37,6 @@ public class LearnerServiceTests {
     void get_learner_by_id(){
         Learner learner = this.ls.getLearnerById(2);
         Assertions.assertNotNull(learner);
-
     }
 
     @Test
@@ -52,7 +51,6 @@ public class LearnerServiceTests {
         learner.setPassword("passcode123");
         this.ls.updateLearner(learner);
         Assertions.assertEquals("passcode123", this.ls.getLearnerById(2).getPassword());
-
     }
 
     @Test
@@ -63,33 +61,7 @@ public class LearnerServiceTests {
 
     @Test
     void get_learner_by_username_and_password(){
-        Learner learner = this.ls.getByUsernameAndPassword("carrico", "password");
+        Learner learner = this.ls.getLearnerByUsername("carrico");
         Assertions.assertNotNull(learner);
-
-        learner = this.ls.getByUsernameAndPassword("caafrrico", "passwosdgrd");
-        Assertions.assertNull(learner);
-
     }
-
-//    @Test
-//    void add_stack_to_learner(){
-//        Learner learner = this.ls.getLearnerById(2);
-//        Stack stack = this.ss.getStackById(1);
-//
-//        this.ls.addStackToLearner(learner, stack);
-//
-//        learner = this.ls.getLearnerById(2);
-//        Assertions.assertTrue(learner.getStacks().size() > 0);
-//    }
-
-//    @Test
-//    void remove_stack_from_learner(){
-//        Learner learner = this.ls.getLearnerById(2);
-//        Stack stack = this.ss.getStackById(1);
-//
-//        this.ls.removeStackFromLearner(learner, stack);
-//
-//        learner = this.ls.getLearnerById(2);
-//        Assertions.assertTrue(!learner.getStacks().contains(stack));
-//    }
 }

@@ -1,9 +1,7 @@
 package dev.carrico.controllers;
 
 import dev.carrico.entities.Card;
-import dev.carrico.entities.Tag;
 import dev.carrico.services.CardService;
-import dev.carrico.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +14,6 @@ public class CardController {
 
     @Autowired
     CardService cardService;
-
-    @Autowired
-    TagService tagService;
 
     @PostMapping("/cards")
     public Card createCard(@RequestBody Card card) {
@@ -50,23 +45,4 @@ public class CardController {
         Boolean result = this.cardService.deleteCardById(cardId);
         return result;
     }
-
-    @PostMapping("/cards/{cardId}/tags/{tagId}")
-    @PutMapping("/cards/{cardId}/tags/{tagId}")
-    public Card addTagToCard(@PathVariable int cardId, @PathVariable int tagId) {
-        Card card = this.cardService.getCardById(cardId);
-        Tag tag = this.tagService.getTagById(tagId);
-//        this.cardService.addTagToCard(card, tag);
-        return card;
-    }
-
-    @DeleteMapping("/cards/{cardId}/tags/{tagId}")
-    public Boolean removeTagFromCard(@PathVariable int cardId, @PathVariable int tagId){
-        Card card = this.cardService.getCardById(cardId);
-        Tag tag = this.tagService.getTagById(tagId);
-
-//        Boolean result = this.cardService.removeTagFromCard(card, tag);
-        return true;
-    }
-
 }

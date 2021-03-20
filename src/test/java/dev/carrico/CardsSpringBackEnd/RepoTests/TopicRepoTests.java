@@ -28,6 +28,13 @@ public class TopicRepoTests {
     }
 
     @Test
+    void get_topic_by_id(){
+        Topic topic = this.topicRepo.findById(1).get();
+        Assertions.assertNotNull(topic);
+        Assertions.assertEquals(1, topic.getTopicId());
+    }
+
+    @Test
     void get_all_topics(){
         Set<Topic> topics = new HashSet<>();
         this.topicRepo.findAll().forEach(topics::add);

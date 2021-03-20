@@ -1,6 +1,6 @@
 package dev.carrico.repos;
 
-import dev.carrico.entities.StackLink;
+import dev.carrico.entities.CardLink;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,8 @@ import java.util.Set;
 
 @Component
 @Repository
-public interface StackLinkRepo extends CrudRepository<StackLink, Integer> {
-    Set<StackLink> findByLearnerId(int learnerId);
-    Set<StackLink> findByRelationship(String relationship);
+public interface CardLinkRepo extends CrudRepository<CardLink, Integer> {
+    Set<CardLink> findByCardId(int cardId);
+    Set<CardLink> findByStackId(int stackId);
+
 }

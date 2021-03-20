@@ -42,6 +42,7 @@ public class CardRepoTests {
     @Test
     void get_card_by_id(){
         Card card = this.cardRepo.findById(1).get();
+        Assertions.assertNotNull(card);
         Assertions.assertEquals(1, card.getCardId());
     }
 

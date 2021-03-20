@@ -29,7 +29,13 @@ public class StackLinkRepoTests {
 
         Assertions.assertNotEquals(0, stackLink.getStackLinkId());
     }
-    
+
+    @Test
+    void get_stack_link_by_id(){
+        StackLink stackLink = this.stackLinkRepo.findById(1).get();
+        Assertions.assertNotNull(stackLink);
+    }
+
     @Test
     void get_all_stack_links(){
         Set<StackLink> stackLinks = new HashSet<>();
@@ -41,17 +47,20 @@ public class StackLinkRepoTests {
 
     @Test
     void get_stack_links_by_learner_id(){
-        // TODO
+        Set<StackLink> stackLinks = this.stackLinkRepo.findByLearnerId(1);
+        Assertions.assertTrue(stackLinks.size() > 0);
     }
 
-    @Test
-    void get_stack_links_by_stack_id(){
-        // TODO
-    }
+//    @Test
+//    void get_stack_links_by_stack_id(){
+//        TODO// probably dont need
+//        Set<StackLink> stackLinks = this.stackLinkRepo.findByStackId()
+//    }
 
     @Test
     void get_stack_links_by_relationship(){
-        // TODO
+        Set<StackLink> stackLinks = this.stackLinkRepo.findByRelationship("Creator");
+        Assertions.assertTrue(stackLinks.size() > 0);
     }
 
     @Test

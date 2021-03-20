@@ -1,7 +1,6 @@
 package dev.carrico.services;
 
 import dev.carrico.entities.Card;
-import dev.carrico.entities.Tag;
 
 import java.util.Set;
 
@@ -15,8 +14,4 @@ public interface CardService {
     Card updateCard(Card card);
 
     boolean deleteCardById(int cardId);
-
-//    Card addTagToCard(Card card, Tag tag);
-//
-//    boolean removeTagFromCard(Card card, Tag tag);
 }

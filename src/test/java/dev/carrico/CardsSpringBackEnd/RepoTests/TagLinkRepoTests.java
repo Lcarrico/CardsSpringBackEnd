@@ -30,6 +30,12 @@ public class TagLinkRepoTests {
     }
 
     @Test
+    void get_tag_links_by_id(){
+        TagLink tagLink = this.tagLinkRepo.findById(1).get();
+        Assertions.assertNotNull(tagLink);
+    }
+
+    @Test
     void get_all_tag_links(){
         Set<TagLink> taglinks = new HashSet<>();
         this.tagLinkRepo.findAll().forEach(taglinks::add);
@@ -40,12 +46,28 @@ public class TagLinkRepoTests {
 
     @Test
     void get_tag_links_by_tag_id(){
-        // TODO
+        Set<TagLink> tagLinks = this.tagLinkRepo.findByTagId(1);
+
+        Assertions.assertTrue(tagLinks.size() > 0);
     }
 
     @Test
     void get_tag_links_by_card_id(){
-        // TODO
+        Set<TagLink> tagLinks = this.tagLinkRepo.findByCardId(1);
+
+        Assertions.assertTrue(tagLinks.size() > 0);
+    }
+
+    @Test
+    void update_tag_link(){
+        TagLink tagLink = this.tagLinkRepo  .findById(1).get();
+        tagLink.setTagId(2);
+        tagLink.setCardId(2);
+        this.tagLinkRepo.save(tagLink);
+        tagLink = this.tagLinkRepo.findById(1).get();
+
+        Assertions.assertEquals(2, tagLink.getTagId());
+        Assertions.assertEquals(2, tagLink.getCardId());
     }
 
     @Test
