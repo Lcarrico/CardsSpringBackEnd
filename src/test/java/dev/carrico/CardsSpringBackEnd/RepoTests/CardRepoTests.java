@@ -61,13 +61,13 @@ public class CardRepoTests {
         Card card = this.cardRepo.findById(1).get();
         this.cardRepo.delete(card);
 
-        Assertions.assertNull(this.cardRepo.findById(1));
+        Assertions.assertFalse(this.cardRepo.findById(1).isPresent());
     }
 
     @Test
     void delete_card_by_id(){
         this.cardRepo.deleteById(1);
 
-        Assertions.assertNull(this.cardRepo.findById(1));
+        Assertions.assertFalse(this.cardRepo.findById(1).isPresent());
     }
 }

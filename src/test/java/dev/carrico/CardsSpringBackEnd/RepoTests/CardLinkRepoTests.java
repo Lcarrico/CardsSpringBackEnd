@@ -22,7 +22,7 @@ public class CardLinkRepoTests {
     void create_card_stack(){
         CardLink cardLink = new CardLink();
         cardLink.setCardId(1);
-        cardLink.setStackId(2);
+        cardLink.setStackId(1);
         this.cardLinkRepo.save(cardLink);
 
         Assertions.assertNotEquals(0, cardLink.getCardLinkId());
@@ -30,9 +30,9 @@ public class CardLinkRepoTests {
 
     @Test
     void get_card_link_by_id(){
-        CardLink cardLink = this.cardLinkRepo.findById(1).get();
+        CardLink cardLink = this.cardLinkRepo.findById(3).get();
         Assertions.assertNotNull(cardLink);
-        Assertions.assertEquals(1, cardLink.getCardLinkId());
+        Assertions.assertEquals(3, cardLink.getCardLinkId());
     }
 
     @Test
@@ -58,11 +58,11 @@ public class CardLinkRepoTests {
 
     @Test
     void update_card_link(){
-        CardLink cardLink = this.cardLinkRepo.findById(1).get();
+        CardLink cardLink = this.cardLinkRepo.findById(3).get();
         cardLink.setCardId(2);
         cardLink.setStackId(2);
         this.cardLinkRepo.save(cardLink);
-        cardLink = this.cardLinkRepo.findById(1).get();
+        cardLink = this.cardLinkRepo.findById(3).get();
 
         Assertions.assertEquals(2, cardLink.getCardId());
         Assertions.assertEquals(2, cardLink.getStackId());
@@ -70,16 +70,16 @@ public class CardLinkRepoTests {
 
     @Test
     void delete_card_link(){
-        CardLink cardLink = this.cardLinkRepo.findById(1).get();
+        CardLink cardLink = this.cardLinkRepo.findById(3).get();
         this.cardLinkRepo.delete(cardLink);
 
-        Assertions.assertNull(this.cardLinkRepo.findById(1));
+        Assertions.assertFalse(this.cardLinkRepo.findById(3).isPresent());
     }
 
     @Test
     void delete_card_link_by_id(){
-        this.cardLinkRepo.deleteById(1);
+        this.cardLinkRepo.deleteById(3);
 
-        Assertions.assertNull(this.cardLinkRepo.findById(1));
+        Assertions.assertFalse(this.cardLinkRepo.findById(3).isPresent());
     }
 }

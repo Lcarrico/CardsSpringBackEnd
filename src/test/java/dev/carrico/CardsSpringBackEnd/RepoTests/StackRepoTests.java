@@ -70,14 +70,14 @@ public class StackRepoTests {
         Stack stack = this.stackRepo.findById(1).get();
         this.stackRepo.delete(stack);
 
-        Assertions.assertNull(this.stackRepo.findById(1));
+        Assertions.assertFalse(this.stackRepo.findById(1).isPresent());
     }
 
     @Test
     void delete_stack_by_id(){
         this.stackRepo.deleteById(1);
 
-        Assertions.assertNull(this.stackRepo.findById(1));
+        Assertions.assertFalse(this.stackRepo.findById(1).isPresent());
     }
 
 }

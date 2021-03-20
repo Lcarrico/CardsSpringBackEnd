@@ -46,6 +46,7 @@ public class LearnerRepoTests {
     @Test
     void get_learner_by_username(){
         Learner learner = this.learnerRepo.findByUsername("carrico");
+        System.out.println(learner);
         Assertions.assertNotNull(learner);
     }
 
@@ -64,13 +65,13 @@ public class LearnerRepoTests {
         Learner learner = this.learnerRepo.findById(1).get();
         this.learnerRepo.delete(learner);
 
-        Assertions.assertNull(this.learnerRepo.findById(1));
+        Assertions.assertFalse(this.learnerRepo.findById(1).isPresent());
     }
 
     @Test
     void delete_learner_by_id(){
         this.learnerRepo.deleteById(1);
 
-        Assertions.assertNull(this.learnerRepo.findById(1));
+        Assertions.assertFalse(this.learnerRepo.findById(1).isPresent());
     }
 }

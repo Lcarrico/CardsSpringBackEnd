@@ -21,7 +21,7 @@ public class TopicRepoTests {
     @Test
     void create_topic(){
         Topic topic = new Topic();
-        topic.setTopicName("Math");
+        topic.setTopicName("New Topic");
         this.topicRepo.save(topic);
 
         Assertions.assertNotEquals(0, topic.getTopicId());
@@ -66,13 +66,13 @@ public class TopicRepoTests {
         Topic topic = this.topicRepo.findById(1).get();
         this.topicRepo.delete(topic);
 
-        Assertions.assertNull(this.topicRepo.findById(1));
+        Assertions.assertFalse(this.topicRepo.findById(1).isPresent());
     }
 
     @Test
     void delete_topic_by_id(){
         this.topicRepo.deleteById(1);
 
-        Assertions.assertNull(this.topicRepo.findById(1));
+        Assertions.assertFalse(this.topicRepo.findById(1).isPresent());
     }
 }

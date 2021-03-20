@@ -68,13 +68,13 @@ public class StackLinkRepoTests {
         StackLink stackLink = this.stackLinkRepo.findById(1).get();
         this.stackLinkRepo.delete(stackLink);
 
-        Assertions.assertNull(this.stackLinkRepo.findById(1));
+        Assertions.assertFalse(this.stackLinkRepo.findById(1).isPresent());
     }
 
     @Test
     void delete_stack_link_by_id(){
         this.stackLinkRepo.deleteById(1);
 
-        Assertions.assertNull(this.stackLinkRepo.findById(1));
+        Assertions.assertFalse(this.stackLinkRepo.findById(1).isPresent());
     }
 }

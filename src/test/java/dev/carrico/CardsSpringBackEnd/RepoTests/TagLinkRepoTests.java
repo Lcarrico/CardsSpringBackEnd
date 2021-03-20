@@ -75,14 +75,14 @@ public class TagLinkRepoTests {
         TagLink tagLink = this.tagLinkRepo.findById(1).get();
         this.tagLinkRepo.delete(tagLink);
 
-        Assertions.assertNull(this.tagLinkRepo.findById(1));
+        Assertions.assertFalse(this.tagLinkRepo.findById(1).isPresent());
     }
 
     @Test
     void delete_tag_link_by_id(){
         this.tagLinkRepo.deleteById(1);
 
-        Assertions.assertNull(this.tagLinkRepo.findById(1));
+        Assertions.assertFalse(this.tagLinkRepo.findById(1).isPresent());
     }
 
 }

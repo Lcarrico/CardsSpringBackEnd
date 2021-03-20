@@ -3,10 +3,14 @@ package dev.carrico.services;
 import dev.carrico.entities.StackLink;
 import dev.carrico.repos.StackLinkRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Component
+@Service
 public class StackLinkServiceImpl implements StackLinkService{
     @Autowired
     StackLinkRepo stackLinkRepo;

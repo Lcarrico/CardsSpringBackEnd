@@ -15,18 +15,21 @@ public class TopicLinkController {
     TopicLinkService topicLinkService;
 
     @PostMapping("/topicLinks")
+    @ResponseBody
     public TopicLink createTopicLink(@RequestBody TopicLink topicLink){
         this.topicLinkService.createTopicLink(topicLink);
         return topicLink;
     }
 
     @GetMapping("/topicLinks/{topicLinkId}")
+    @ResponseBody
     public TopicLink getTopicLinkById(@PathVariable int topicLinkId){
         TopicLink topicLink = this.topicLinkService.getTopicLinkById(topicLinkId);
         return topicLink;
     }
 
     @GetMapping("/topicLinks")
+    @ResponseBody
     public Set<TopicLink> getTopicLinks(@RequestParam(name = "topicId", defaultValue = "") String topicId,
                                        @RequestParam(name = "stackId", defaultValue = "") String stackId){
         Set<TopicLink> topicLinks;
@@ -46,6 +49,7 @@ public class TopicLinkController {
     }
 
     @PutMapping("/topicLinks/{topicLinkId}")
+    @ResponseBody
     public TopicLink updateTopicLink(@PathVariable int topicLinkId, @RequestBody TopicLink topicLink){
         topicLink.setTopicLinkId(topicLinkId);
         this.topicLinkService.updateTopicLink(topicLink);
@@ -53,6 +57,7 @@ public class TopicLinkController {
     }
 
     @DeleteMapping("/topicLinks/{topicLinkId}")
+    @ResponseBody
     public Boolean deleteTopicLinkById(@PathVariable int topicLinkId){
         Boolean result = this.topicLinkService.deleteTopicLinkById(topicLinkId);
         return result;

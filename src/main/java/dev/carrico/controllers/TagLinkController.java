@@ -15,18 +15,21 @@ public class TagLinkController {
     TagLinkService tagLinkService;
 
     @PostMapping("/tagLinks")
+    @ResponseBody
     public TagLink createTagLink(@RequestBody TagLink tagLink){
         this.tagLinkService.createTagLink(tagLink);
         return tagLink;
     }
 
     @GetMapping("/tagLinks/{tagLinkId}")
+    @ResponseBody
     public TagLink getTagLinkById(@PathVariable int tagLinkId){
         TagLink tagLink = this.tagLinkService.getTagLinkById(tagLinkId);
         return tagLink;
     }
 
     @GetMapping("/tagLinks")
+    @ResponseBody
     public Set<TagLink> getAllTagLinks(@RequestParam(name = "tagId", defaultValue = "") String tagId,
                                        @RequestParam(name = "cardId", defaultValue = "") String cardId){
         Set<TagLink> tagLinks;
@@ -46,6 +49,7 @@ public class TagLinkController {
     }
 
     @PutMapping("/tagLinks/{tagLinkId}")
+    @ResponseBody
     public TagLink updateTagLink(@PathVariable int tagLinkId, @RequestBody TagLink tagLink){
         tagLink.setTagLinkId(tagLinkId);
         this.tagLinkService.updateTagLink(tagLink);
@@ -53,6 +57,7 @@ public class TagLinkController {
     }
 
     @DeleteMapping("/tagLinks/{tagLinkId}")
+    @ResponseBody
     public Boolean deleteTagLinkById(@PathVariable int tagLinkId){
         Boolean result = this.tagLinkService.deleteTagLinkById(tagLinkId);
         return result;

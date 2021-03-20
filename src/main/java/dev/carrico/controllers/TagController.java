@@ -16,18 +16,21 @@ public class TagController {
     TagService tagService;
 
     @PostMapping("/tags")
+    @ResponseBody
     public Tag createTag(@RequestBody Tag tag){
         this.tagService.createTag(tag);
         return tag;
     }
 
     @GetMapping("/tags/{tagId}")
+    @ResponseBody
     public Tag getTagById(@PathVariable int tagId){
         Tag tag = this.tagService.getTagById(tagId);
         return tag;
     }
 
     @GetMapping("/tags")
+    @ResponseBody
     public Set<Tag> getTopics(@RequestParam(name = "tagName",defaultValue = "") String tagName){
         Set<Tag> tags;
         if (tagName.isEmpty()){
@@ -41,6 +44,7 @@ public class TagController {
     }
 
     @PutMapping("/tags/{tagId}")
+    @ResponseBody
     public Tag updateTag(@PathVariable int tagId, @RequestBody Tag tag){
         tag.setTagId(tagId);
         this.tagService.updateTag(tag);
@@ -48,6 +52,7 @@ public class TagController {
     }
 
     @DeleteMapping("/tags/{tagId}")
+    @ResponseBody
     public Boolean deleteBookById(@PathVariable int tagId){
         Boolean result = this.tagService.deleteTagById(tagId);
         return result;

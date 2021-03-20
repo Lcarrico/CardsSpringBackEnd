@@ -3,10 +3,14 @@ package dev.carrico.services;
 import dev.carrico.entities.CardLink;
 import dev.carrico.repos.CardLinkRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Component
+@Service
 public class CardLinkServiceImpl implements CardLinkService{
     @Autowired
     private CardLinkRepo cardLinkRepo;

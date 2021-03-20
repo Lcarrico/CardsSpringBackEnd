@@ -16,24 +16,28 @@ public class CardController {
     CardService cardService;
 
     @PostMapping("/cards")
+    @ResponseBody
     public Card createCard(@RequestBody Card card) {
         this.cardService.createCard(card);
         return card;
     }
 
     @GetMapping("/cards/{cardId}")
+    @ResponseBody
     public Card getCardById(@PathVariable int cardId) {
         Card card = this.cardService.getCardById(cardId);
         return card;
     }
 
     @GetMapping("/cards")
+    @ResponseBody
     public Set<Card> getAllCards() {
         Set<Card> cards = this.cardService.getAllCards();
         return cards;
     }
 
     @PutMapping("/cards/{cardId}")
+    @ResponseBody
     public Card updateCard(@PathVariable int cardId, @RequestBody Card card) {
         card.setCardId(cardId);
         this.cardService.updateCard(card);
@@ -41,6 +45,7 @@ public class CardController {
     }
 
     @DeleteMapping("/cards/{cardId}")
+    @ResponseBody
     public Boolean deleteBookById(@PathVariable int cardId) {
         Boolean result = this.cardService.deleteCardById(cardId);
         return result;

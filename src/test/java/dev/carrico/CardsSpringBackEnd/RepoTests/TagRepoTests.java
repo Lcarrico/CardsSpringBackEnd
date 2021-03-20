@@ -21,7 +21,7 @@ public class TagRepoTests {
     @Test
     void create_tag(){
         Tag tag = new Tag();
-        tag.setTagName("Math");
+        tag.setTagName("New Tag");
         tagRepo.save(tag);
 
         Assertions.assertNotEquals(0, tag.getTagId());
@@ -65,13 +65,13 @@ public class TagRepoTests {
         Tag tag = this.tagRepo.findById(1).get();
         this.tagRepo.delete(tag);
 
-        Assertions.assertNull(this.tagRepo.findById(1));
+        Assertions.assertFalse(this.tagRepo.findById(1).isPresent());
     }
 
     @Test
     void delete_tag_by_id(){
         this.tagRepo.deleteById(1);
 
-        Assertions.assertNull(this.tagRepo.findById(1));
+        Assertions.assertFalse(this.tagRepo.findById(1).isPresent());
     }
 }

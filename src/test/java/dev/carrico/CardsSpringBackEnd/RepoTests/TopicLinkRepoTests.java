@@ -59,13 +59,13 @@ public class TopicLinkRepoTests {
         TopicLink topicLink = this.topicLinkRepo.findById(1).get();
         this.topicLinkRepo.delete(topicLink);
 
-        Assertions.assertNull(this.topicLinkRepo.findById(1));
+        Assertions.assertFalse(this.topicLinkRepo.findById(1).isPresent());
     }
 
     @Test
     void delete_topic_link_by_id(){
         this.topicLinkRepo.deleteById(1);
 
-        Assertions.assertNull(this.topicLinkRepo.findById(1));
+        Assertions.assertFalse(this.topicLinkRepo.findById(1).isPresent());
     }
 }

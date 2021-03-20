@@ -3,10 +3,14 @@ package dev.carrico.services;
 import dev.carrico.entities.TagLink;
 import dev.carrico.repos.TagLinkRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Component
+@Service
 public class TagLinkServiceImpl implements TagLinkService{
     @Autowired
     private TagLinkRepo tagLinkRepo;
