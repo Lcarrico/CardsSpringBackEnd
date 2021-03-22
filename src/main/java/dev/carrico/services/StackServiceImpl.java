@@ -18,6 +18,7 @@ public class StackServiceImpl implements StackService{
 
     @Override
     public Stack createStack(Stack stack) {
+        stack.setStackId(0);
         this.stackRepo.save(stack);
         return stack;
     }

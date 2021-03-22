@@ -18,6 +18,7 @@ public class TagServiceImpl implements TagService{
 
     @Override
     public Tag createTag(Tag tag) {
+        tag.setTagId(0);
         this.tagRepo.save(tag);
         return tag;
     }

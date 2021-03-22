@@ -17,6 +17,7 @@ public class TagLinkServiceImpl implements TagLinkService{
 
     @Override
     public TagLink createTagLink(TagLink tagLink) {
+        tagLink.setTagLinkId(0);
         tagLinkRepo.save(tagLink);
         return tagLink;
     }

@@ -19,6 +19,7 @@ public class LearnerServiceImpl implements LearnerService{
 
     @Override
     public Learner createLearner(Learner learner) {
+        learner.setLearnerId(0);
         learnerRepo.save(learner);
         return learner;
     }
