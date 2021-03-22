@@ -3,7 +3,6 @@ package dev.carrico.controllers;
 import dev.carrico.entities.CardLink;
 import dev.carrico.services.CardLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,19 +10,18 @@ import java.util.Set;
 
 @Component
 @RestController
+@CrossOrigin
 public class CardLinkController {
     @Autowired
     CardLinkService cardLinkService;
 
     @PostMapping("/cardLinks")
-    @ResponseBody
     public CardLink createCardLink(@RequestBody CardLink cardLink){
         this.cardLinkService.createCardLink(cardLink);
         return cardLink;
     }
 
     @GetMapping("/cardLinks")
-    @ResponseBody
     public Set<CardLink> getCardLinks(@RequestParam(name = "cardId", defaultValue = "") String cardId,
                                       @RequestParam(name = "stackId", defaultValue = "") String stackId){
         Set<CardLink> cardLinks = null;
@@ -40,14 +38,12 @@ public class CardLinkController {
     }
 
     @GetMapping("/cardLinks/{cardLinkId")
-    @ResponseBody
     public CardLink getCardLinkById(@PathVariable int cardLinkId){
         CardLink cardLink = this.cardLinkService.getCardLinkById(cardLinkId);
         return cardLink;
     }
 
     @PutMapping("/cardLinks/{cardLinkId")
-    @ResponseBody
     public CardLink updateCardLink(@PathVariable int cardLinkId, @RequestBody CardLink cardLink){
         cardLink.setCardLinkId(cardLinkId);
         this.cardLinkService.updateCardLink(cardLink);
@@ -55,7 +51,6 @@ public class CardLinkController {
     }
 
     @DeleteMapping("/cardLinks/{cardLinkId")
-    @ResponseBody
     public Boolean deleteCardLinkById(@PathVariable int cardLinkId){
         Boolean result = this.cardLinkService.deleteCardLinkById(cardLinkId);
         return result;

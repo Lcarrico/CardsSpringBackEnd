@@ -10,19 +10,18 @@ import java.util.Set;
 
 @Component
 @RestController
+@CrossOrigin
 public class StackLinkController {
     @Autowired
     StackLinkService stackLinkService;
 
     @PostMapping("/stackLinks")
-    @ResponseBody
     public StackLink createStackLink(@RequestBody StackLink stackLink){
         this.stackLinkService.createStackLink(stackLink);
         return stackLink;
     }
 
     @GetMapping("/stackLinks")
-    @ResponseBody
     public Set<StackLink> getStackLinks(@RequestParam(name = "learnerId", defaultValue = "") String learnerId,
                                         @RequestParam(name = "relationship", defaultValue = "") String relationship){
         Set<StackLink> stackLinks = null;
@@ -39,14 +38,12 @@ public class StackLinkController {
     }
 
     @GetMapping("/stackLinks/{stackLinkId}")
-    @ResponseBody
     public StackLink getStackLinkById(@PathVariable int stackLinkId){
         StackLink stackLink = this.stackLinkService.getStackLinkById(stackLinkId);
         return stackLink;
     }
 
     @PutMapping("/stackLinks/{stackLinkId}")
-    @ResponseBody
     public StackLink updateStackLink(@PathVariable int stackLinkId, @RequestBody StackLink stackLink){
         stackLink.setStackLinkId(stackLinkId);
         this.stackLinkService.updateStackLink(stackLink);
@@ -54,7 +51,6 @@ public class StackLinkController {
     }
 
     @DeleteMapping("/stackLinks/{stackLinkId}")
-    @ResponseBody
     public Boolean deleteStackLinkById(@PathVariable int stackLinkId){
         Boolean result = this.stackLinkService.deleteStackLinkById(stackLinkId);
         return result;

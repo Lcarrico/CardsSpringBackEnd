@@ -1,62 +1,40 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
 import dev.carrico.entities.Card;
-import dev.carrico.entities.Tag;
-import dev.carrico.services.CardService;
-import dev.carrico.services.TagService;
+import dev.carrico.repos.CardRepo;
+import dev.carrico.services.CardServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-import sun.jvm.hotspot.utilities.Assert;
 
-import java.util.Set;
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
-@Transactional
+@ExtendWith(MockitoExtension.class)
 public class CardServiceTests {
 
-    @Autowired
-    CardService cs;
+    @InjectMocks
+    private CardServiceImpl cardService;
 
-    @Autowired
-    TagService ts;
+    @Mock
+    private CardRepo cardRepo;
 
     @Test
     void create_card(){
+        Mockito.when(cardRepo.save(any())).then(returnsFirstArg());
+
         Card card = new Card();
+        card.setCardId(5);
         card.setQuestion("What is love?");
         card.setAnswer("Baby don't hurt meeee, no moreeee.");
-        this.cs.createCard(card);
-        Assertions.assertNotEquals(0, card.getCardId());
-    }
+        card = this.cardService.createCard(card);
 
-    @Test
-    void get_card_by_id(){
-        Card card = this.cs.getCardById(3);
-        Assertions.assertNotNull(card);
-    }
-
-    @Test
-    void get_all_cards(){
-        Set<Card> cards = cs.getAllCards();
-        System.out.println(cards);
-        Assertions.assertTrue(cards.size() > 0);
-    }
-
-    @Test
-    void update_card(){
-        Card card = this.cs.getCardById(3);
-        card.setAnswer("Magical Protein");
-        this.cs.updateCard(card);
-        Assertions.assertEquals("Magical Protein", this.cs.getCardById(3).getAnswer());
-
-    }
-
-    @Test
-    void delete_card(){
-        boolean result = this.cs.deleteCardById(3);
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(0, card.getCardId());
     }
 }
