@@ -5,6 +5,7 @@ import dev.carrico.services.LearnerService;
 import dev.carrico.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,9 +17,13 @@ public class LoginController {
     @Autowired
     LearnerService learnerService;
 
-    @PostMapping("/login")
     @ResponseBody
     @CrossOrigin
+    @RequestMapping(
+            value = "/login",
+            method = RequestMethod.POST,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
     public String loginLearner(@RequestBody Learner learner){
         Learner loggedInLearner = learnerService.getLearnerByUsername(learner.getUsername());
 
