@@ -1,8 +1,8 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
-import dev.carrico.entities.Stack;
-import dev.carrico.repos.StackRepo;
-import dev.carrico.services.StackServiceImpl;
+import dev.carrico.entities.Topic;
+import dev.carrico.repos.TopicRepo;
+import dev.carrico.services.TopicServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,24 +17,24 @@ import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-public class StackServiceTests {
+public class TopicServiceTests {
 
     @InjectMocks
-    private StackServiceImpl stackService;
+    private TopicServiceImpl topicService;
 
     @Mock
-    private StackRepo stackRepo;
+    private TopicRepo topicRepo;
 
     @Test
-    void create_stack(){
-        Mockito.when(stackRepo.save(any())).then(returnsFirstArg());
+    void create_topic(){
+        Mockito.when(topicRepo.save(any())).then(returnsFirstArg());
 
-        Stack stack = new Stack();
-        stack.setStackId(9);
-        stack.setStackName("Math");
-        stack = this.stackService.createStack(stack);
+        Topic topic = new Topic();
+        topic.setTopicId(9);
+        topic.setTopicName("Big maths");
+        topic.setTopicId(1);
+        topic = this.topicService.createTopic(topic);
 
-        Assertions.assertEquals(0, stack.getStackId());
+        Assertions.assertEquals(0, topic.getTopicId());
     }
-
 }

@@ -17,6 +17,7 @@ public class StackLinkServiceImpl implements StackLinkService{
 
     @Override
     public StackLink createStackLink(StackLink stackLink) {
+        stackLink.setStackLinkId(0);
         stackLinkRepo.save(stackLink);
         return stackLink;
     }

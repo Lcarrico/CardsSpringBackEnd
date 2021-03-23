@@ -11,26 +11,24 @@ import java.util.Set;
 
 @Component
 @RestController
+@CrossOrigin
 public class TopicController {
     @Autowired
     TopicService topicService;
     
     @PostMapping("/topics")
-    @ResponseBody
     public Topic createTopic(@RequestBody Topic topic){
         this.topicService.createTopic(topic);
         return topic;
     }
 
     @GetMapping("/topics/{topicId}")
-    @ResponseBody
     public Topic getTopicById(@PathVariable int topicId){
         Topic topic = this.topicService.getTopicById(topicId);
         return topic;
     }
 
     @GetMapping("/topics")
-    @ResponseBody
     public Set<Topic> getTopics(@RequestParam(name = "topicName",defaultValue = "") String topicName){
         Set<Topic> topics;
         if (topicName.isEmpty()){
@@ -44,7 +42,6 @@ public class TopicController {
     }
 
     @PutMapping("/topics/{topicId}")
-    @ResponseBody
     public Topic updateTopic(@PathVariable int topicId, @RequestBody Topic topic){
         topic.setTopicId(topicId);
         this.topicService.updateTopic(topic);
@@ -52,7 +49,6 @@ public class TopicController {
     }
 
     @DeleteMapping("/topics/{topicId}")
-    @ResponseBody
     public Boolean deleteTopicById(@PathVariable int topicId){
         Boolean result = this.topicService.deleteTopicById(topicId);
         return result;

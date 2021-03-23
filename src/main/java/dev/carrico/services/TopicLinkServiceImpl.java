@@ -17,6 +17,7 @@ public class TopicLinkServiceImpl implements TopicLinkService{
 
     @Override
     public TopicLink createTopicLink(TopicLink topicLink) {
+        topicLink.setTopicLinkId(0);
         topicLinkRepo.save(topicLink);
         return topicLink;
     }

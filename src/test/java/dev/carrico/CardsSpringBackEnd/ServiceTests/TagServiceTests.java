@@ -1,61 +1,39 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
 import dev.carrico.entities.Tag;
-import dev.carrico.services.TagService;
+import dev.carrico.repos.TagRepo;
+import dev.carrico.services.TagServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
-@Transactional
+@ExtendWith(MockitoExtension.class)
 public class TagServiceTests {
-    @Autowired
-    TagService ts;
+
+    @InjectMocks
+    private TagServiceImpl tagService;
+
+    @Mock
+    private TagRepo tagRepo;
 
     @Test
     void create_tag(){
+        Mockito.when(tagRepo.save(any())).then(returnsFirstArg());
+
         Tag tag = new Tag();
+        tag.setTagId(9);
         tag.setTagName("Test");
-        ts.createTag(tag);
+        tag = this.tagService.createTag(tag);
 
-        Assertions.assertNotEquals(0, tag.getTagId());
-    }
-
-    @Test
-    void get_tag_by_id(){
-        Tag tag = ts.getTagById(7);
-
-        Assertions.assertNotNull(tag);
-        Assertions.assertTrue(tag.getTagName().equals("Math"));
-    }
-
-    @Test
-    void get_all_tag(){
-        Set<Tag> tags = ts.getAllTags();
-
-        Assertions.assertNotNull(tags);
-        Assertions.assertTrue(tags.size() > 0);
-    }
-
-    @Test
-    void update_tag(){
-        Tag tag = new Tag();
-        tag.setTagId(7);
-        tag.setTagName("Not Math");
-        ts.updateTag(tag);
-        tag = ts.getTagById(7);
-
-        Assertions.assertTrue(tag.getTagName().equals("Not Math"));
-    }
-
-    @Test
-    void delete_tag(){
-        boolean result = ts.deleteTagById(7);
-
-        Assertions.assertTrue(result);
+        Assertions.assertEquals(0, tag.getTagId());
     }
 }

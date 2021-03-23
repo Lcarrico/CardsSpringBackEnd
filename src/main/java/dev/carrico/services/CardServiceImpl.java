@@ -18,6 +18,7 @@ public class CardServiceImpl implements CardService{
 
     @Override
     public Card createCard(Card card) {
+        card.setCardId(0);
         this.cardRepo.save(card);
         return card;
     }

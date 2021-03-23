@@ -18,6 +18,7 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public Topic createTopic(Topic topic) {
+        topic.setTopicId(0);
         this.topicRepo.save(topic);
         return topic;
     }

@@ -1,67 +1,40 @@
 package dev.carrico.CardsSpringBackEnd.ServiceTests;
 
 import dev.carrico.entities.Learner;
-import dev.carrico.entities.Stack;
-import dev.carrico.services.LearnerService;
-import dev.carrico.services.StackService;
+import dev.carrico.repos.LearnerRepo;
+import dev.carrico.services.LearnerServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-import sun.jvm.hotspot.utilities.Assert;
 
-import java.util.Set;
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
-@Transactional
+@ExtendWith(MockitoExtension.class)
 public class LearnerServiceTests {
 
-    @Autowired
-    LearnerService ls;
+    @InjectMocks
+    private LearnerServiceImpl learnerService;
 
-    @Autowired
-    StackService ss;
+    @Mock
+    private LearnerRepo learnerRepo;
 
     @Test
     void create_learner(){
+        Mockito.when(learnerRepo.save(any())).then(returnsFirstArg());
+
         Learner learner = new Learner();
+        learner.setLearnerId(9);
         learner.setUsername("AwesomeNickName");
         learner.setPassword("password");
-        this.ls.createLearner(learner);
-        Assertions.assertNotEquals(0, learner.getLearnerId());
+        learner = this.learnerService.createLearner(learner);
 
-    }
-
-    @Test
-    void get_learner_by_id(){
-        Learner learner = this.ls.getLearnerById(2);
-        Assertions.assertNotNull(learner);
-    }
-
-    @Test
-    void get_all_learners(){
-        Set<Learner> learners = this.ls.getAllLearners();
-        Assertions.assertTrue(learners.size() > 0);
-    }
-
-    @Test
-    void update_learner(){
-        Learner learner = this.ls.getLearnerById(2);
-        learner.setPassword("passcode123");
-        this.ls.updateLearner(learner);
-        Assertions.assertEquals("passcode123", this.ls.getLearnerById(2).getPassword());
-    }
-
-    @Test
-    void delete_learner_by_id(){
-        boolean result = this.ls.deleteLearnerById(2);
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    void get_learner_by_username_and_password(){
-        Learner learner = this.ls.getLearnerByUsername("carrico");
-        Assertions.assertNotNull(learner);
+        Assertions.assertEquals(0, learner.getLearnerId());
     }
 }

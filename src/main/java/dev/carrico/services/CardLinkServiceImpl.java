@@ -17,6 +17,7 @@ public class CardLinkServiceImpl implements CardLinkService{
 
     @Override
     public CardLink createCardLink(CardLink cardLink) {
+        cardLink.setCardLinkId(0);
         this.cardLinkRepo.save(cardLink);
         return cardLink;
     }

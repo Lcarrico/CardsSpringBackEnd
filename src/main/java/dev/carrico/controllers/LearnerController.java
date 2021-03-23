@@ -11,26 +11,24 @@ import java.util.Set;
 
 @Component
 @RestController
+@CrossOrigin
 public class LearnerController {
     @Autowired
     LearnerService learnerService;
 
     @PostMapping("/learners")
-    @ResponseBody
     public Learner createLearner(@RequestBody Learner learner){
         this.learnerService.createLearner(learner);
         return learner;
     }
 
     @GetMapping("/learners/{learnerId}")
-    @ResponseBody
     public Learner getLearnerById(@PathVariable int learnerId){
         Learner learner = this.learnerService.getLearnerById(learnerId);
         return learner;
     }
 
     @GetMapping("/learners")
-    @ResponseBody
     public Set<Learner> getLearners(@RequestParam(name = "username",defaultValue = "") String username){
         Set<Learner> learners;
         if (username.isEmpty()){
@@ -44,7 +42,6 @@ public class LearnerController {
     }
 
     @PutMapping("/learners/{learnerId}")
-    @ResponseBody
     public Learner updateLearner(@PathVariable int learnerId, @RequestBody Learner learner){
         learner.setLearnerId(learnerId);
         this.learnerService.updateLearner(learner);
@@ -52,7 +49,6 @@ public class LearnerController {
     }
 
     @DeleteMapping("/learners/{learnerId}")
-    @ResponseBody
     public Boolean deleteLearnerById(@PathVariable int learnerId){
         Boolean result = this.learnerService.deleteLearnerById(learnerId);
         return result;
