@@ -1,5 +1,6 @@
 package dev.carrico.controllers;
 
+import dev.carrico.aspects.Authorized;
 import dev.carrico.entities.TopicLink;
 import dev.carrico.services.TopicLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,21 @@ public class TopicLinkController {
     TopicLinkService topicLinkService;
 
     @PostMapping("/topicLinks")
+    @Authorized
     public TopicLink createTopicLink(@RequestBody TopicLink topicLink){
         this.topicLinkService.createTopicLink(topicLink);
         return topicLink;
     }
 
     @GetMapping("/topicLinks/{topicLinkId}")
+    @Authorized
     public TopicLink getTopicLinkById(@PathVariable int topicLinkId){
         TopicLink topicLink = this.topicLinkService.getTopicLinkById(topicLinkId);
         return topicLink;
     }
 
     @GetMapping("/topicLinks")
+    @Authorized
     public Set<TopicLink> getTopicLinks(@RequestParam(name = "topicId", defaultValue = "") String topicId,
                                        @RequestParam(name = "stackId", defaultValue = "") String stackId){
         Set<TopicLink> topicLinks = null;
@@ -44,6 +48,7 @@ public class TopicLinkController {
     }
 
     @PutMapping("/topicLinks/{topicLinkId}")
+    @Authorized
     public TopicLink updateTopicLink(@PathVariable int topicLinkId, @RequestBody TopicLink topicLink){
         topicLink.setTopicLinkId(topicLinkId);
         this.topicLinkService.updateTopicLink(topicLink);
@@ -51,6 +56,7 @@ public class TopicLinkController {
     }
 
     @DeleteMapping("/topicLinks/{topicLinkId}")
+    @Authorized
     public Boolean deleteTopicLinkById(@PathVariable int topicLinkId){
         Boolean result = this.topicLinkService.deleteTopicLinkById(topicLinkId);
         return result;

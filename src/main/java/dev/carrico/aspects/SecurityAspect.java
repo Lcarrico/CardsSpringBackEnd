@@ -23,7 +23,7 @@ public class SecurityAspect {
     @Autowired
     LearnerService ls;
 
-    @Around("AuthorizeJP")
+    @Around("authorizeJP()")
     public Object authenticate(ProceedingJoinPoint pjp) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
@@ -45,6 +45,6 @@ public class SecurityAspect {
         return null;
     }
 
-    @Pointcut("@annotation(dev.carrico.CardsSpringBackEnd.Authorized)")
+    @Pointcut("@annotation(dev.carrico.aspects.Authorized)")
     private void authorizeJP(){ }
 }

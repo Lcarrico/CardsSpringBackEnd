@@ -25,6 +25,6 @@ public class LoggingAspect {
         logger.error("Exception thrown in method: "+joinPoint.toString());
     }
 
-    @Pointcut("execution(* dev.carrico.CardsSpringBackEnd.controllers.*(..)")
+    @Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
     private void logPointCut(){}
 }

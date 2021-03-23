@@ -1,5 +1,6 @@
 package dev.carrico.controllers;
 
+import dev.carrico.aspects.Authorized;
 import dev.carrico.entities.CardLink;
 import dev.carrico.services.CardLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,14 @@ public class CardLinkController {
     CardLinkService cardLinkService;
 
     @PostMapping("/cardLinks")
+    @Authorized
     public CardLink createCardLink(@RequestBody CardLink cardLink){
         this.cardLinkService.createCardLink(cardLink);
         return cardLink;
     }
 
     @GetMapping("/cardLinks")
+    @Authorized
     public Set<CardLink> getCardLinks(@RequestParam(name = "cardId", defaultValue = "") String cardId,
                                       @RequestParam(name = "stackId", defaultValue = "") String stackId){
         Set<CardLink> cardLinks = null;
@@ -38,12 +41,14 @@ public class CardLinkController {
     }
 
     @GetMapping("/cardLinks/{cardLinkId")
+    @Authorized
     public CardLink getCardLinkById(@PathVariable int cardLinkId){
         CardLink cardLink = this.cardLinkService.getCardLinkById(cardLinkId);
         return cardLink;
     }
 
     @PutMapping("/cardLinks/{cardLinkId")
+    @Authorized
     public CardLink updateCardLink(@PathVariable int cardLinkId, @RequestBody CardLink cardLink){
         cardLink.setCardLinkId(cardLinkId);
         this.cardLinkService.updateCardLink(cardLink);
@@ -51,6 +56,7 @@ public class CardLinkController {
     }
 
     @DeleteMapping("/cardLinks/{cardLinkId")
+    @Authorized
     public Boolean deleteCardLinkById(@PathVariable int cardLinkId){
         Boolean result = this.cardLinkService.deleteCardLinkById(cardLinkId);
         return result;
