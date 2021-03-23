@@ -1,5 +1,6 @@
 package dev.carrico.controllers;
 
+import dev.carrico.aspects.Authorized;
 import dev.carrico.entities.Stack;
 import dev.carrico.services.StackService;
 import org.springframework.beans.factory.annotation.Autowired;
