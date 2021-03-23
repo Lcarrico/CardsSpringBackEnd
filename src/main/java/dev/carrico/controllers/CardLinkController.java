@@ -40,14 +40,14 @@ public class CardLinkController {
         return cardLinks;
     }
 
-    @GetMapping("/cardLinks/{cardLinkId")
+    @GetMapping("/cardLinks/{cardLinkId}")
     @Authorized
     public CardLink getCardLinkById(@PathVariable int cardLinkId){
         CardLink cardLink = this.cardLinkService.getCardLinkById(cardLinkId);
         return cardLink;
     }
 
-    @PutMapping("/cardLinks/{cardLinkId")
+    @PutMapping("/cardLinks/{cardLinkId}")
     @Authorized
     public CardLink updateCardLink(@PathVariable int cardLinkId, @RequestBody CardLink cardLink){
         cardLink.setCardLinkId(cardLinkId);
@@ -55,7 +55,7 @@ public class CardLinkController {
         return cardLink;
     }
 
-    @DeleteMapping("/cardLinks/{cardLinkId")
+    @DeleteMapping("/cardLinks/{cardLinkId}")
     @Authorized
     public Boolean deleteCardLinkById(@PathVariable int cardLinkId){
         Boolean result = this.cardLinkService.deleteCardLinkById(cardLinkId);
