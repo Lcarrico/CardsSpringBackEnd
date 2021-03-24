@@ -24,7 +24,6 @@ public class StackLinkController {
     }
 
     @GetMapping("/stackLinks")
-    @Authorized
     public Set<StackLink> getStackLinks(@RequestParam(name = "learnerId", defaultValue = "") String learnerId,
                                         @RequestParam(name = "relationship", defaultValue = "") String relationship){
         Set<StackLink> stackLinks = null;
@@ -41,7 +40,6 @@ public class StackLinkController {
     }
 
     @GetMapping("/stackLinks/{stackLinkId}")
-    @Authorized
     public StackLink getStackLinkById(@PathVariable int stackLinkId){
         StackLink stackLink = this.stackLinkService.getStackLinkById(stackLinkId);
         return stackLink;

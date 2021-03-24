@@ -25,14 +25,12 @@ public class TopicController {
     }
 
     @GetMapping("/topics/{topicId}")
-    @Authorized
     public Topic getTopicById(@PathVariable int topicId){
         Topic topic = this.topicService.getTopicById(topicId);
         return topic;
     }
 
     @GetMapping("/topics")
-    @Authorized
     public Set<Topic> getTopics(@RequestParam(name = "topicName",defaultValue = "") String topicName){
         Set<Topic> topics;
         if (topicName.isEmpty()){

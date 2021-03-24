@@ -1,5 +1,6 @@
 package dev.carrico.controllers;
 
+import dev.carrico.aspects.Admin;
 import dev.carrico.aspects.Authorized;
 import dev.carrico.entities.Learner;
 import dev.carrico.services.LearnerService;
@@ -18,21 +19,20 @@ public class LearnerController {
     LearnerService learnerService;
 
     @PostMapping("/learners")
-    @Authorized
     public Learner createLearner(@RequestBody Learner learner){
         this.learnerService.createLearner(learner);
         return learner;
     }
 
     @GetMapping("/learners/{learnerId}")
-    @Authorized
+    @Admin
     public Learner getLearnerById(@PathVariable int learnerId){
         Learner learner = this.learnerService.getLearnerById(learnerId);
         return learner;
     }
 
     @GetMapping("/learners")
-    @Authorized
+    @Admin
     public Set<Learner> getLearners(@RequestParam(name = "username",defaultValue = "") String username){
         Set<Learner> learners;
         if (username.isEmpty()){

@@ -24,14 +24,12 @@ public class TopicLinkController {
     }
 
     @GetMapping("/topicLinks/{topicLinkId}")
-    @Authorized
     public TopicLink getTopicLinkById(@PathVariable int topicLinkId){
         TopicLink topicLink = this.topicLinkService.getTopicLinkById(topicLinkId);
         return topicLink;
     }
 
     @GetMapping("/topicLinks")
-    @Authorized
     public Set<TopicLink> getTopicLinks(@RequestParam(name = "topicId", defaultValue = "") String topicId,
                                        @RequestParam(name = "stackId", defaultValue = "") String stackId){
         Set<TopicLink> topicLinks = null;

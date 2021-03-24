@@ -24,14 +24,12 @@ public class StackController {
     }
 
     @GetMapping("/stacks/{stackId}")
-    @Authorized
     public Stack getStackById(@PathVariable int stackId){
         Stack stack = this.stackService.getStackById(stackId);
         return stack;
     }
 
     @GetMapping("/stacks")
-    @Authorized
     public Set<Stack> getAllStacks(){
         Set<Stack> stacks = this.stackService.getAllStacks();
         return stacks;
