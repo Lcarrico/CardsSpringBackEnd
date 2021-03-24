@@ -1,5 +1,6 @@
 package dev.carrico.controllers;
 
+import dev.carrico.aspects.Authorized;
 import dev.carrico.entities.StackLink;
 import dev.carrico.services.StackLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,14 @@ public class StackLinkController {
     StackLinkService stackLinkService;
 
     @PostMapping("/stackLinks")
+    @Authorized
     public StackLink createStackLink(@RequestBody StackLink stackLink){
         this.stackLinkService.createStackLink(stackLink);
         return stackLink;
     }
 
     @GetMapping("/stackLinks")
+    @Authorized
     public Set<StackLink> getStackLinks(@RequestParam(name = "learnerId", defaultValue = "") String learnerId,
                                         @RequestParam(name = "relationship", defaultValue = "") String relationship){
         Set<StackLink> stackLinks = null;
@@ -38,12 +41,14 @@ public class StackLinkController {
     }
 
     @GetMapping("/stackLinks/{stackLinkId}")
+    @Authorized
     public StackLink getStackLinkById(@PathVariable int stackLinkId){
         StackLink stackLink = this.stackLinkService.getStackLinkById(stackLinkId);
         return stackLink;
     }
 
     @PutMapping("/stackLinks/{stackLinkId}")
+    @Authorized
     public StackLink updateStackLink(@PathVariable int stackLinkId, @RequestBody StackLink stackLink){
         stackLink.setStackLinkId(stackLinkId);
         this.stackLinkService.updateStackLink(stackLink);
@@ -51,6 +56,7 @@ public class StackLinkController {
     }
 
     @DeleteMapping("/stackLinks/{stackLinkId}")
+    @Authorized
     public Boolean deleteStackLinkById(@PathVariable int stackLinkId){
         Boolean result = this.stackLinkService.deleteStackLinkById(stackLinkId);
         return result;
