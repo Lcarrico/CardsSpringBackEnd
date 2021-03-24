@@ -60,7 +60,7 @@ public class SecurityAspect {
 
             String[] admins = {"carrico", "TestAccount"};
             Learner learner = ls.getLearnerByUsername(loggedInLearner);
-            if (learner != null && learnerId < 10) {
+            if (learner != null) {
                 for (String admin: admins){
                     if (admin.equals(loggedInLearner)){
                         Object obj = pjp.proceed();
