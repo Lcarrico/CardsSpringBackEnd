@@ -24,14 +24,12 @@ public class TagLinkController {
     }
 
     @GetMapping("/tagLinks/{tagLinkId}")
-    @Authorized
     public TagLink getTagLinkById(@PathVariable int tagLinkId){
         TagLink tagLink = this.tagLinkService.getTagLinkById(tagLinkId);
         return tagLink;
     }
 
     @GetMapping("/tagLinks")
-    @Authorized
     public Set<TagLink> getTagLinks(@RequestParam(name = "tagId", defaultValue = "") String tagId,
                                        @RequestParam(name = "cardId", defaultValue = "") String cardId){
         Set<TagLink> tagLinks = null;

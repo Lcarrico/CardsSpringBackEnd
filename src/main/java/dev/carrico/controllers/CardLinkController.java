@@ -24,7 +24,6 @@ public class CardLinkController {
     }
 
     @GetMapping("/cardLinks")
-    @Authorized
     public Set<CardLink> getCardLinks(@RequestParam(name = "cardId", defaultValue = "") String cardId,
                                       @RequestParam(name = "stackId", defaultValue = "") String stackId){
         Set<CardLink> cardLinks = null;
@@ -41,7 +40,6 @@ public class CardLinkController {
     }
 
     @GetMapping("/cardLinks/{cardLinkId}")
-    @Authorized
     public CardLink getCardLinkById(@PathVariable int cardLinkId){
         CardLink cardLink = this.cardLinkService.getCardLinkById(cardLinkId);
         return cardLink;

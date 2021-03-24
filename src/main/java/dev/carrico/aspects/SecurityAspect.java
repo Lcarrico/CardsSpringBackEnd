@@ -45,6 +45,37 @@ public class SecurityAspect {
         return null;
     }
 
+    @Around("adminJP()")
+    public Object adminsOnly(ProceedingJoinPoint pjp) throws Throwable {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+
+        String auth = request.getHeader("Authorization");
+        System.out.println(auth);
+        System.out.println(pjp.getSignature().toString());
+
+        if (auth != null) {
+            String loggedInLearner = isValidJWT(auth).getClaim("username").toString();
+            int learnerId = isValidJWT(auth).getClaim("learnerId").asInt();
+
+            String[] admins = {"carrico", "TestAccount"};
+            Learner learner = ls.getLearnerByUsername(loggedInLearner);
+            if (learner != null && learnerId < 10) {
+                for (String admin: admins){
+                    if (admin.equals(loggedInLearner)){
+                        Object obj = pjp.proceed();
+                        return obj;
+                    }
+                }
+            }
+        }
+        response.sendError(401);
+        return null;
+    }
+
     @Pointcut("@annotation(dev.carrico.aspects.Authorized)")
     private void authorizeJP(){ }
+
+    @Pointcut("@annotation(dev.carrico.aspects.Admin)")
+    private void adminJP(){ }
 }

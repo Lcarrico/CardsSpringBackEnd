@@ -25,14 +25,12 @@ public class CardController {
     }
 
     @GetMapping("/cards/{cardId}")
-    @Authorized
     public Card getCardById(@PathVariable int cardId) {
         Card card = this.cardService.getCardById(cardId);
         return card;
     }
 
     @GetMapping("/cards")
-    @Authorized
     public Set<Card> getAllCards() {
         Set<Card> cards = this.cardService.getAllCards();
         return cards;

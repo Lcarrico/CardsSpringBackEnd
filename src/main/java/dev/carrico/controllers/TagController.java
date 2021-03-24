@@ -25,14 +25,12 @@ public class TagController {
     }
 
     @GetMapping("/tags/{tagId}")
-    @Authorized
     public Tag getTagById(@PathVariable int tagId){
         Tag tag = this.tagService.getTagById(tagId);
         return tag;
     }
 
     @GetMapping("/tags")
-    @Authorized
     public Set<Tag> getTags(@RequestParam(name = "tagName",defaultValue = "") String tagName){
         Set<Tag> tags;
         if (tagName.isEmpty()){
