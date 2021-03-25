@@ -2,6 +2,7 @@ package dev.carrico.aspects;
 
 import dev.carrico.entities.Learner;
 import dev.carrico.services.LearnerService;
+import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,6 +20,8 @@ import static dev.carrico.utils.JwtUtil.isValidJWT;
 @Component
 @Aspect
 public class SecurityAspect {
+
+    private static Logger logger = Logger.getLogger(LoggingAspect.class);
 
     @Autowired
     LearnerService ls;
@@ -41,7 +44,8 @@ public class SecurityAspect {
                 return obj;
             }
         }
-        response.sendError(401);
+        logger.error("Learner not logged in to perform action.");
+        response.sendError(401, "Please make sure you are logged in to perform this action.");
         return null;
     }
 
@@ -69,7 +73,8 @@ public class SecurityAspect {
                 }
             }
         }
-        response.sendError(401);
+        logger.error("Cannot access learners resource if not admin.");
+        response.sendError(401, "You need to be an admin to access these resources.");
         return null;
     }
 
