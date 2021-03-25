@@ -37,9 +37,10 @@ public class SecurityAspect {
 
         if (auth != null) {
             String loggedInLearner = isValidJWT(auth).getClaim("username").toString();
-
+            loggedInLearner = loggedInLearner.substring(1);
+            loggedInLearner = loggedInLearner.substring(0, loggedInLearner.length() - 1);
             Learner learner = ls.getLearnerByUsername(loggedInLearner);
-            if (learner != null && learner.getUsername() == loggedInLearner) {
+            if (learner != null && learner.getUsername().equals(loggedInLearner)) {
                 Object obj = pjp.proceed();
                 return obj;
             }
@@ -60,16 +61,16 @@ public class SecurityAspect {
 
         if (auth != null) {
             String loggedInLearner = isValidJWT(auth).getClaim("username").toString();
-            int learnerId = isValidJWT(auth).getClaim("learnerId").asInt();
+            loggedInLearner = loggedInLearner.substring(1);
+            loggedInLearner = loggedInLearner.substring(0, loggedInLearner.length() - 1);
 
             String[] admins = {"carrico", "TestAccount"};
-            Learner learner = ls.getLearnerByUsername(loggedInLearner);
-            if (learner != null) {
-                for (String admin: admins){
-                    if (admin.equals(loggedInLearner)){
-                        Object obj = pjp.proceed();
-                        return obj;
-                    }
+            for (String admin: admins){
+                logger.info(admin);
+                logger.info(loggedInLearner);
+                if (loggedInLearner.equals(admin)){
+                    Object obj = pjp.proceed();
+                    return obj;
                 }
             }
         }
