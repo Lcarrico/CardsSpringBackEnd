@@ -44,7 +44,7 @@ public class TopicLinkController {
     public ResponseEntity<TopicLink> createTopicLink(@RequestBody TopicLink topicLink){
         this.checkValidity(topicLink);
         this.topicLinkService.createTopicLink(topicLink);
-        return ResponseEntity.status(200).body(topicLink);
+        return ResponseEntity.status(201).body(topicLink);
     }
 
     @GetMapping("/topicLinks/{topicLinkId}")

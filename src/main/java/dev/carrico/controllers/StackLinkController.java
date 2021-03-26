@@ -45,7 +45,7 @@ public class StackLinkController {
     public ResponseEntity<StackLink> createStackLink(@RequestBody StackLink stackLink){
         this.checkValidity(stackLink);
         stackLink = this.stackLinkService.createStackLink(stackLink);
-        return ResponseEntity.status(200).body(stackLink);
+        return ResponseEntity.status(201).body(stackLink);
     }
 
     @GetMapping("/stackLinks")

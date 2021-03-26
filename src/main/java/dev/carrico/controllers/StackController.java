@@ -22,7 +22,7 @@ public class StackController {
     @Authorized
     public ResponseEntity<Stack> createStack(@RequestBody Stack stack){
         this.stackService.createStack(stack);
-        return ResponseEntity.status(200).body(stack);
+        return ResponseEntity.status(201).body(stack);
     }
 
     @GetMapping("/stacks/{stackId}")

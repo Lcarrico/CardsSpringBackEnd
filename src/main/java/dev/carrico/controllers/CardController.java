@@ -23,7 +23,7 @@ public class CardController {
     @Authorized
     public ResponseEntity<Card> createCard(@RequestBody Card card) {
         this.cardService.createCard(card);
-        return ResponseEntity.status(200).body(card);
+        return ResponseEntity.status(201).body(card);
     }
 
     @GetMapping("/cards/{cardId}")

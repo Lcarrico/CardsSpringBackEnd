@@ -45,7 +45,7 @@ public class TagLinkController {
     public ResponseEntity<TagLink> createTagLink(@RequestBody TagLink tagLink){
         this.checkValidity(tagLink);
         tagLink = this.tagLinkService.createTagLink(tagLink);
-        return ResponseEntity.status(200).body(tagLink);
+        return ResponseEntity.status(201).body(tagLink);
     }
 
     @GetMapping("/tagLinks/{tagLinkId}")

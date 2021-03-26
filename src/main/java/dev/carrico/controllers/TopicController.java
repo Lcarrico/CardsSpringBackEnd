@@ -23,7 +23,7 @@ public class TopicController {
     @Authorized
     public ResponseEntity<Topic> createTopic(@RequestBody Topic topic){
         this.topicService.createTopic(topic);
-        return ResponseEntity.status(200).body(topic);
+        return ResponseEntity.status(201).body(topic);
     }
 
     @GetMapping("/topics/{topicId}")

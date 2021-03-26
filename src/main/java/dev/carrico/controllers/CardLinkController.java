@@ -45,7 +45,7 @@ public class CardLinkController {
     public ResponseEntity<CardLink> createCardLink(@RequestBody CardLink cardLink){
         this.checkValidity(cardLink);
         cardLink = this.cardLinkService.createCardLink(cardLink);
-        return ResponseEntity.status(200).body(cardLink);
+        return ResponseEntity.status(201).body(cardLink);
     }
 
     @GetMapping("/cardLinks")

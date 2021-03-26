@@ -23,7 +23,7 @@ public class TagController {
     @Authorized
     public ResponseEntity<Tag> createTag(@RequestBody Tag tag){
         this.tagService.createTag(tag);
-        return ResponseEntity.status(200).body(tag);
+        return ResponseEntity.status(201).body(tag);
     }
 
     @GetMapping("/tags/{tagId}")

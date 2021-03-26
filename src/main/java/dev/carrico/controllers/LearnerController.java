@@ -33,7 +33,7 @@ public class LearnerController {
             if(this.learnerService.getLearnerByUsername(learner.getUsername()) != null){
                 throw new DuplicateKeyException("Username already in use");
             }
-            return ResponseEntity.status(200).body(this.learnerService.createLearner(learner));
+            return ResponseEntity.status(201).body(this.learnerService.createLearner(learner));
         }catch (DuplicateKeyException e){
             return ResponseEntity.status(405).body("There already exists an account with that username. Please try again.");
         }catch (RuntimeException e){
