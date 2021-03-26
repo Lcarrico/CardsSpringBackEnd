@@ -6,6 +6,7 @@ import dev.carrico.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,11 +25,14 @@ public class LoginController {
             method = RequestMethod.POST,
             produces = MediaType.TEXT_PLAIN_VALUE
     )
-    public String loginLearner(@RequestBody Learner learner){
+    public ResponseEntity<String> loginLearner(@RequestBody Learner learner){
         Learner loggedInLearner = learnerService.getLearnerByUsername(learner.getUsername());
 
         if (loggedInLearner != null && loggedInLearner.getPassword().equals(learner.getPassword())){
-            return JwtUtil.generate(loggedInLearner.getUsername(), loggedInLearner.getLearnerId());
+            return ResponseEntity
+                    .status(200)
+                    .body(JwtUtil.generate(loggedInLearner.getUsername(),
+                                          loggedInLearner.getLearnerId()));
         }
 
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);

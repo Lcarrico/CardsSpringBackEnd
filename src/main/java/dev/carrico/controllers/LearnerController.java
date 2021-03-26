@@ -1,7 +1,6 @@
 package dev.carrico.controllers;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import dev.carrico.aspects.Admin;
 import dev.carrico.entities.Learner;
 import dev.carrico.services.LearnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +42,14 @@ public class LearnerController {
     }
 
     @GetMapping("/learners/{learnerId}")
-    @Admin
-    public Learner getLearnerById(@PathVariable int learnerId){
+    public ResponseEntity<Learner> getLearnerById(@PathVariable int learnerId){
         Learner learner = this.learnerService.getLearnerById(learnerId);
-        return learner;
+        learner.setPassword("");
+        return ResponseEntity.status(200).body(learner);
     }
 
     @GetMapping("/learners")
-    @Admin
-    public Set<Learner> getLearners(@RequestParam(name = "username",defaultValue = "") String username){
+    public ResponseEntity<Set<Learner>> getLearners(@RequestParam(name = "username",defaultValue = "") String username){
         Set<Learner> learners;
         if (username.isEmpty()){
             learners = this.learnerService.getAllLearners();
@@ -60,7 +58,10 @@ public class LearnerController {
             learners = new HashSet<>();
             learners.add(this.learnerService.getLearnerByUsername(username));
         }
-        return learners;
+        for (Learner learner: learners) {
+            learner.setPassword("");
+        };
+        return ResponseEntity.status(200).body(learners);
     }
 
     @PutMapping("/learners/{learnerId}")
@@ -84,7 +85,7 @@ public class LearnerController {
     }
 
     @DeleteMapping("/learners/{learnerId}")
-    public Boolean deleteLearnerById(@PathVariable int learnerId){
+    public ResponseEntity<Boolean> deleteLearnerById(@PathVariable int learnerId){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         String auth = request.getHeader("Authorization");
 
@@ -94,9 +95,9 @@ public class LearnerController {
 
             if (loggedInLearnerId == learnerId) {
                 Boolean result = this.learnerService.deleteLearnerById(learnerId);
-                return result;
+                return ResponseEntity.status(200).body(result);
             }
         }
-        return false;
+        return ResponseEntity.status(200).body(false);
     }
 }

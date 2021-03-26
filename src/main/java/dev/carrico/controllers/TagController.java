@@ -4,10 +4,12 @@ import dev.carrico.aspects.Authorized;
 import dev.carrico.entities.Tag;
 import dev.carrico.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Component
@@ -19,19 +21,19 @@ public class TagController {
 
     @PostMapping("/tags")
     @Authorized
-    public Tag createTag(@RequestBody Tag tag){
+    public ResponseEntity<Tag> createTag(@RequestBody Tag tag){
         this.tagService.createTag(tag);
-        return tag;
+        return ResponseEntity.status(200).body(tag);
     }
 
     @GetMapping("/tags/{tagId}")
-    public Tag getTagById(@PathVariable int tagId){
+    public ResponseEntity<Tag> getTagById(@PathVariable int tagId){
         Tag tag = this.tagService.getTagById(tagId);
-        return tag;
+        return ResponseEntity.status(200).body(tag);
     }
 
     @GetMapping("/tags")
-    public Set<Tag> getTags(@RequestParam(name = "tagName",defaultValue = "") String tagName){
+    public ResponseEntity<Set<Tag>> getTags(@RequestParam(name = "tagName",defaultValue = "") String tagName){
         Set<Tag> tags;
         if (tagName.isEmpty()){
             tags = this.tagService.getAllTags();
@@ -40,21 +42,24 @@ public class TagController {
             tags = new HashSet<>();
             tags.add(this.tagService.getTagByTagName(tagName));
         }
-        return tags;
+        return ResponseEntity.status(200).body(tags);
     }
 
     @PutMapping("/tags/{tagId}")
     @Authorized
-    public Tag updateTag(@PathVariable int tagId, @RequestBody Tag tag){
+    public ResponseEntity<Tag> updateTag(@PathVariable int tagId, @RequestBody Tag tag){
         tag.setTagId(tagId);
+        if (this.tagService.getTagById(tagId) == null){
+            throw new NoSuchElementException("Unable to update. This tag does not exist.");
+        }
         this.tagService.updateTag(tag);
-        return tag;
+        return ResponseEntity.status(200).body(tag);
     }
 
     @DeleteMapping("/tags/{tagId}")
     @Authorized
-    public Boolean deleteTagById(@PathVariable int tagId){
+    public ResponseEntity<Boolean> deleteTagById(@PathVariable int tagId){
         Boolean result = this.tagService.deleteTagById(tagId);
-        return result;
+        return ResponseEntity.status(200).body(result);
     }
 }
