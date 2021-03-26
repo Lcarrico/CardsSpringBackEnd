@@ -2,6 +2,7 @@ package dev.carrico.aspects;
 
 import dev.carrico.entities.Learner;
 import dev.carrico.services.LearnerService;
+import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -20,6 +21,8 @@ import static dev.carrico.utils.JwtUtil.isValidJWT;
 @Aspect
 public class SecurityAspect {
 
+    private static Logger logger = Logger.getLogger(LoggingAspect.class);
+
     @Autowired
     LearnerService ls;
 
@@ -34,48 +37,23 @@ public class SecurityAspect {
 
         if (auth != null) {
             String loggedInLearner = isValidJWT(auth).getClaim("username").toString();
-
+            if (loggedInLearner.startsWith("\"")) {
+                loggedInLearner = loggedInLearner.substring(1);
+            }
+            if (loggedInLearner.endsWith("\"")) {
+                loggedInLearner = loggedInLearner.substring(0, loggedInLearner.length() - 1);
+            }
             Learner learner = ls.getLearnerByUsername(loggedInLearner);
-            if (learner != null && learner.getUsername() == loggedInLearner) {
+            if (learner != null && learner.getUsername().equals(loggedInLearner)) {
                 Object obj = pjp.proceed();
                 return obj;
             }
         }
-        response.sendError(401);
-        return null;
-    }
-
-    @Around("adminJP()")
-    public Object adminsOnly(ProceedingJoinPoint pjp) throws Throwable {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-
-        String auth = request.getHeader("Authorization");
-        System.out.println(auth);
-        System.out.println(pjp.getSignature().toString());
-
-        if (auth != null) {
-            String loggedInLearner = isValidJWT(auth).getClaim("username").toString();
-            int learnerId = isValidJWT(auth).getClaim("learnerId").asInt();
-
-            String[] admins = {"carrico", "TestAccount"};
-            Learner learner = ls.getLearnerByUsername(loggedInLearner);
-            if (learner != null) {
-                for (String admin: admins){
-                    if (admin.equals(loggedInLearner)){
-                        Object obj = pjp.proceed();
-                        return obj;
-                    }
-                }
-            }
-        }
-        response.sendError(401);
+        logger.error("Learner not logged in to perform action.");
+        response.sendError(401, "Please make sure you are logged in to perform this action.");
         return null;
     }
 
     @Pointcut("@annotation(dev.carrico.aspects.Authorized)")
     private void authorizeJP(){ }
-
-    @Pointcut("@annotation(dev.carrico.aspects.Admin)")
-    private void adminJP(){ }
 }
