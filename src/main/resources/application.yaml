@@ -1,0 +1,11 @@
+server:
+  ssl:
+    key-store: keystore.jks
+    key-store-password: password
+    key-store-type: jks
+    key-alias: tomcat
+    key-password: password
+spring:
+  datasource:
+    url: jdbc:postgresql://35.223.52.20:5432/cardsDB?user=master&password=master
+    driver-class-name: org.postgresql.Driver
